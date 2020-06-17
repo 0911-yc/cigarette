@@ -1,0 +1,14 @@
+server:
+  port: 8888
+# 数据源配置
+spring:
+  datasource:
+    username: root
+    password: Yc171013@
+    url: jdbc:mysql://139.224.192.190:3306/cigarette
+    driver-class-name: com.mysql.jdbc.Driver
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  locations: classpath:mybatis/mapper/*.xml
+logging:
+  level: debug
