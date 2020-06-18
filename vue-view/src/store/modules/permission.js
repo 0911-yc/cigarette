@@ -7,8 +7,11 @@ import { asyncRoutes, constantRoutes } from '@/router'
  */
 function hasPermission(roles, route) {
   if (route.meta && route.meta.roles) {
+    console.debug("-----------hasPermission:true")
+    console.debug(route.meta.roles)
     return roles.some(role => route.meta.roles.includes(role))
   } else {
+    ("-----------hasPermission:false")
     return true
   }
 }
@@ -50,11 +53,16 @@ const actions = {
   generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
       let accessedRoutes
-      if (roles.includes('admin')) {
-        accessedRoutes = asyncRoutes || []
-      } else {
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-      }
+      // if (roles.includes('admin')) {
+      //   accessedRoutes = asyncRoutes || []
+      // } else {
+      //   accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+      // }
+      console.debug('generateRoutes--------')
+      console.debug(asyncRoutes)
+      // 将else中的代码拿出来，改为验证所有角色权限，根据角色的名字来动态生成要加载的菜单
+      accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
+      console.debug(accessedRoutes)
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })
