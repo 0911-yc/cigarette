@@ -2,6 +2,7 @@ package com.xr.smoke.service.impl;
 
 import com.xr.smoke.entity.AdministratorExample;
 import com.xr.smoke.entity.Administrator;
+import com.xr.smoke.entity.Institution;
 import com.xr.smoke.mapper.AdminUserMapper;
 import com.xr.smoke.service.AdminUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,10 @@ public class AdminUserSericeImpl implements AdminUserService {
     }
 
     @Override
-    public List<String> findUserRoles(String username) {
-        List<String> roles = adminUserMapper.findUserRoles(username);
+    public List<String> findUserRoles(String account) {
+        List<String> roles = adminUserMapper.findUserRoles(account);
         return roles;
     }
+
+
 }

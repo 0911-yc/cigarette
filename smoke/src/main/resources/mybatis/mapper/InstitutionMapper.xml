@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xr.smoke.mapper.InstitutionMapper">
+  <resultMap id="BaseResultMap" type="com.xr.smoke.entity.Institution">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="departmentID" jdbcType="VARCHAR" property="departmentid" />
+    <result column="departmentName" jdbcType="VARCHAR" property="departmentname" />
+    <result column="departmentHead" jdbcType="VARCHAR" property="departmenthead" />
+    <result column="divisionalManagement" jdbcType="VARCHAR" property="divisionalmanagement" />
+    <result column="leader" jdbcType="VARCHAR" property="leader" />
+    <result column="creationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="currentId" jdbcType="INTEGER" property="currentid" />
+    <result column="currentName" jdbcType="VARCHAR" property="currentname" />
+    <result column="departmentState" jdbcType="INTEGER" property="departmentstate" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, departmentID, departmentName, departmentHead, divisionalManagement, leader, creationTime, 
+    currentId, currentName, departmentState
+  </sql>
+  <select id="selectByExample" parameterType="com.xr.smoke.entity.InstitutionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from institution
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from institution
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from institution
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xr.smoke.entity.InstitutionExample">
+    delete from institution
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xr.smoke.entity.Institution">
+    insert into institution (id, departmentID, departmentName, 
+      departmentHead, divisionalManagement, leader, 
+      creationTime, currentId, currentName, 
+      departmentState)
+    values (#{id,jdbcType=INTEGER}, #{departmentid,jdbcType=VARCHAR}, #{departmentname,jdbcType=VARCHAR}, 
+      #{departmenthead,jdbcType=VARCHAR}, #{divisionalmanagement,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{currentid,jdbcType=INTEGER}, #{currentname,jdbcType=VARCHAR}, 
+      #{departmentstate,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xr.smoke.entity.Institution">
+    insert into institution
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="departmentid != null">
+        departmentID,
+      </if>
+      <if test="departmentname != null">
+        departmentName,
+      </if>
+      <if test="departmenthead != null">
+        departmentHead,
+      </if>
+      <if test="divisionalmanagement != null">
+        divisionalManagement,
+      </if>
+      <if test="leader != null">
+        leader,
+      </if>
+      <if test="creationtime != null">
+        creationTime,
+      </if>
+      <if test="currentid != null">
+        currentId,
+      </if>
+      <if test="currentname != null">
+        currentName,
+      </if>
+      <if test="departmentstate != null">
+        departmentState,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null">
+        #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="departmenthead != null">
+        #{departmenthead,jdbcType=VARCHAR},
+      </if>
+      <if test="divisionalmanagement != null">
+        #{divisionalmanagement,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null">
+        #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentid != null">
+        #{currentid,jdbcType=INTEGER},
+      </if>
+      <if test="currentname != null">
+        #{currentname,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentstate != null">
+        #{departmentstate,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xr.smoke.entity.InstitutionExample" resultType="java.lang.Long">
+    select count(*) from institution
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update institution
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentid != null">
+        departmentID = #{record.departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentname != null">
+        departmentName = #{record.departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmenthead != null">
+        departmentHead = #{record.departmenthead,jdbcType=VARCHAR},
+      </if>
+      <if test="record.divisionalmanagement != null">
+        divisionalManagement = #{record.divisionalmanagement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leader != null">
+        leader = #{record.leader,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationtime != null">
+        creationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.currentid != null">
+        currentId = #{record.currentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.currentname != null">
+        currentName = #{record.currentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentstate != null">
+        departmentState = #{record.departmentstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update institution
+    set id = #{record.id,jdbcType=INTEGER},
+      departmentID = #{record.departmentid,jdbcType=VARCHAR},
+      departmentName = #{record.departmentname,jdbcType=VARCHAR},
+      departmentHead = #{record.departmenthead,jdbcType=VARCHAR},
+      divisionalManagement = #{record.divisionalmanagement,jdbcType=VARCHAR},
+      leader = #{record.leader,jdbcType=VARCHAR},
+      creationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      currentId = #{record.currentid,jdbcType=INTEGER},
+      currentName = #{record.currentname,jdbcType=VARCHAR},
+      departmentState = #{record.departmentstate,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xr.smoke.entity.Institution">
+    update institution
+    <set>
+      <if test="departmentid != null">
+        departmentID = #{departmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentname != null">
+        departmentName = #{departmentname,jdbcType=VARCHAR},
+      </if>
+      <if test="departmenthead != null">
+        departmentHead = #{departmenthead,jdbcType=VARCHAR},
+      </if>
+      <if test="divisionalmanagement != null">
+        divisionalManagement = #{divisionalmanagement,jdbcType=VARCHAR},
+      </if>
+      <if test="leader != null">
+        leader = #{leader,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        creationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentid != null">
+        currentId = #{currentid,jdbcType=INTEGER},
+      </if>
+      <if test="currentname != null">
+        currentName = #{currentname,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentstate != null">
+        departmentState = #{departmentstate,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xr.smoke.entity.Institution">
+    update institution
+    set departmentID = #{departmentid,jdbcType=VARCHAR},
+      departmentName = #{departmentname,jdbcType=VARCHAR},
+      departmentHead = #{departmenthead,jdbcType=VARCHAR},
+      divisionalManagement = #{divisionalmanagement,jdbcType=VARCHAR},
+      leader = #{leader,jdbcType=VARCHAR},
+      creationTime = #{creationtime,jdbcType=TIMESTAMP},
+      currentId = #{currentid,jdbcType=INTEGER},
+      currentName = #{currentname,jdbcType=VARCHAR},
+      departmentState = #{departmentstate,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

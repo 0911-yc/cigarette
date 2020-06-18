@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xr.smoke.mapper.PoliticianTalkMapper">
+  <resultMap id="BaseResultMap" type="com.xr.smoke.entity.PoliticianTalk">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="talkName" jdbcType="VARCHAR" property="talkname" />
+    <result column="talkDempartment" jdbcType="VARCHAR" property="talkdempartment" />
+    <result column="talkPoliticsStatus" jdbcType="INTEGER" property="talkpoliticsstatus" />
+    <result column="talkDuty" jdbcType="VARCHAR" property="talkduty" />
+    <result column="talkType" jdbcType="VARCHAR" property="talktype" />
+    <result column="talkcreationTime" jdbcType="TIMESTAMP" property="talkcreationtime" />
+    <result column="talkSite" jdbcType="VARCHAR" property="talksite" />
+    <result column="talkPerson" jdbcType="VARCHAR" property="talkperson" />
+    <result column="talkOutline" jdbcType="VARCHAR" property="talkoutline" />
+    <result column="talkContent" jdbcType="VARCHAR" property="talkcontent" />
+    <result column="datacreationTime" jdbcType="TIMESTAMP" property="datacreationtime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, talkName, talkDempartment, talkPoliticsStatus, talkDuty, talkType, talkcreationTime, 
+    talkSite, talkPerson, talkOutline, talkContent, datacreationTime, creator, status
+  </sql>
+  <select id="selectByExample" parameterType="com.xr.smoke.entity.PoliticianTalkExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from politicianTalk
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from politicianTalk
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from politicianTalk
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xr.smoke.entity.PoliticianTalkExample">
+    delete from politicianTalk
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xr.smoke.entity.PoliticianTalk">
+    insert into politicianTalk (id, talkName, talkDempartment, 
+      talkPoliticsStatus, talkDuty, talkType, 
+      talkcreationTime, talkSite, talkPerson, 
+      talkOutline, talkContent, datacreationTime, 
+      creator, status)
+    values (#{id,jdbcType=INTEGER}, #{talkname,jdbcType=VARCHAR}, #{talkdempartment,jdbcType=VARCHAR}, 
+      #{talkpoliticsstatus,jdbcType=INTEGER}, #{talkduty,jdbcType=VARCHAR}, #{talktype,jdbcType=VARCHAR}, 
+      #{talkcreationtime,jdbcType=TIMESTAMP}, #{talksite,jdbcType=VARCHAR}, #{talkperson,jdbcType=VARCHAR}, 
+      #{talkoutline,jdbcType=VARCHAR}, #{talkcontent,jdbcType=VARCHAR}, #{datacreationtime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xr.smoke.entity.PoliticianTalk">
+    insert into politicianTalk
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="talkname != null">
+        talkName,
+      </if>
+      <if test="talkdempartment != null">
+        talkDempartment,
+      </if>
+      <if test="talkpoliticsstatus != null">
+        talkPoliticsStatus,
+      </if>
+      <if test="talkduty != null">
+        talkDuty,
+      </if>
+      <if test="talktype != null">
+        talkType,
+      </if>
+      <if test="talkcreationtime != null">
+        talkcreationTime,
+      </if>
+      <if test="talksite != null">
+        talkSite,
+      </if>
+      <if test="talkperson != null">
+        talkPerson,
+      </if>
+      <if test="talkoutline != null">
+        talkOutline,
+      </if>
+      <if test="talkcontent != null">
+        talkContent,
+      </if>
+      <if test="datacreationtime != null">
+        datacreationTime,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="talkname != null">
+        #{talkname,jdbcType=VARCHAR},
+      </if>
+      <if test="talkdempartment != null">
+        #{talkdempartment,jdbcType=VARCHAR},
+      </if>
+      <if test="talkpoliticsstatus != null">
+        #{talkpoliticsstatus,jdbcType=INTEGER},
+      </if>
+      <if test="talkduty != null">
+        #{talkduty,jdbcType=VARCHAR},
+      </if>
+      <if test="talktype != null">
+        #{talktype,jdbcType=VARCHAR},
+      </if>
+      <if test="talkcreationtime != null">
+        #{talkcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="talksite != null">
+        #{talksite,jdbcType=VARCHAR},
+      </if>
+      <if test="talkperson != null">
+        #{talkperson,jdbcType=VARCHAR},
+      </if>
+      <if test="talkoutline != null">
+        #{talkoutline,jdbcType=VARCHAR},
+      </if>
+      <if test="talkcontent != null">
+        #{talkcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="datacreationtime != null">
+        #{datacreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xr.smoke.entity.PoliticianTalkExample" resultType="java.lang.Long">
+    select count(*) from politicianTalk
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update politicianTalk
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.talkname != null">
+        talkName = #{record.talkname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.talkdempartment != null">
+        talkDempartment = #{record.talkdempartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.talkpoliticsstatus != null">
+        talkPoliticsStatus = #{record.talkpoliticsstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.talkduty != null">
+        talkDuty = #{record.talkduty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.talktype != null">
+        talkType = #{record.talktype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.talkcreationtime != null">
+        talkcreationTime = #{record.talkcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.talksite != null">
+        talkSite = #{record.talksite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.talkperson != null">
+        talkPerson = #{record.talkperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.talkoutline != null">
+        talkOutline = #{record.talkoutline,jdbcType=VARCHAR},
+      </if>
+      <if test="record.talkcontent != null">
+        talkContent = #{record.talkcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datacreationtime != null">
+        datacreationTime = #{record.datacreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update politicianTalk
+    set id = #{record.id,jdbcType=INTEGER},
+      talkName = #{record.talkname,jdbcType=VARCHAR},
+      talkDempartment = #{record.talkdempartment,jdbcType=VARCHAR},
+      talkPoliticsStatus = #{record.talkpoliticsstatus,jdbcType=INTEGER},
+      talkDuty = #{record.talkduty,jdbcType=VARCHAR},
+      talkType = #{record.talktype,jdbcType=VARCHAR},
+      talkcreationTime = #{record.talkcreationtime,jdbcType=TIMESTAMP},
+      talkSite = #{record.talksite,jdbcType=VARCHAR},
+      talkPerson = #{record.talkperson,jdbcType=VARCHAR},
+      talkOutline = #{record.talkoutline,jdbcType=VARCHAR},
+      talkContent = #{record.talkcontent,jdbcType=VARCHAR},
+      datacreationTime = #{record.datacreationtime,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xr.smoke.entity.PoliticianTalk">
+    update politicianTalk
+    <set>
+      <if test="talkname != null">
+        talkName = #{talkname,jdbcType=VARCHAR},
+      </if>
+      <if test="talkdempartment != null">
+        talkDempartment = #{talkdempartment,jdbcType=VARCHAR},
+      </if>
+      <if test="talkpoliticsstatus != null">
+        talkPoliticsStatus = #{talkpoliticsstatus,jdbcType=INTEGER},
+      </if>
+      <if test="talkduty != null">
+        talkDuty = #{talkduty,jdbcType=VARCHAR},
+      </if>
+      <if test="talktype != null">
+        talkType = #{talktype,jdbcType=VARCHAR},
+      </if>
+      <if test="talkcreationtime != null">
+        talkcreationTime = #{talkcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="talksite != null">
+        talkSite = #{talksite,jdbcType=VARCHAR},
+      </if>
+      <if test="talkperson != null">
+        talkPerson = #{talkperson,jdbcType=VARCHAR},
+      </if>
+      <if test="talkoutline != null">
+        talkOutline = #{talkoutline,jdbcType=VARCHAR},
+      </if>
+      <if test="talkcontent != null">
+        talkContent = #{talkcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="datacreationtime != null">
+        datacreationTime = #{datacreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xr.smoke.entity.PoliticianTalk">
+    update politicianTalk
+    set talkName = #{talkname,jdbcType=VARCHAR},
+      talkDempartment = #{talkdempartment,jdbcType=VARCHAR},
+      talkPoliticsStatus = #{talkpoliticsstatus,jdbcType=INTEGER},
+      talkDuty = #{talkduty,jdbcType=VARCHAR},
+      talkType = #{talktype,jdbcType=VARCHAR},
+      talkcreationTime = #{talkcreationtime,jdbcType=TIMESTAMP},
+      talkSite = #{talksite,jdbcType=VARCHAR},
+      talkPerson = #{talkperson,jdbcType=VARCHAR},
+      talkOutline = #{talkoutline,jdbcType=VARCHAR},
+      talkContent = #{talkcontent,jdbcType=VARCHAR},
+      datacreationTime = #{datacreationtime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

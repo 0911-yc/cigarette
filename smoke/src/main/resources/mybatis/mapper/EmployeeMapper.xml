@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xr.smoke.mapper.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.xr.smoke.entity.Employee">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="employeeId" jdbcType="INTEGER" property="employeeid" />
+    <result column="employeeName" jdbcType="VARCHAR" property="employeename" />
+    <result column="employeeSex" jdbcType="VARCHAR" property="employeesex" />
+    <result column="employeeAge" jdbcType="INTEGER" property="employeeage" />
+    <result column="education" jdbcType="INTEGER" property="education" />
+    <result column="politicsStatus" jdbcType="INTEGER" property="politicsstatus" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="departmentID" jdbcType="INTEGER" property="departmentid" />
+    <result column="Account" jdbcType="VARCHAR" property="account" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="postId" jdbcType="INTEGER" property="postid" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="currentName" jdbcType="VARCHAR" property="currentname" />
+    <result column="employeeStatus" jdbcType="INTEGER" property="employeestatus" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, employeeId, employeeName, employeeSex, employeeAge, education, politicsStatus, 
+    phone, departmentID, Account, password, postId, time, currentName, employeeStatus
+  </sql>
+  <select id="selectByExample" parameterType="com.xr.smoke.entity.EmployeeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from employee
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from employee
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xr.smoke.entity.EmployeeExample">
+    delete from employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xr.smoke.entity.Employee">
+    insert into employee (id, employeeId, employeeName, 
+      employeeSex, employeeAge, education, 
+      politicsStatus, phone, departmentID, 
+      Account, password, postId, 
+      time, currentName, employeeStatus
+      )
+    values (#{id,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{employeename,jdbcType=VARCHAR}, 
+      #{employeesex,jdbcType=VARCHAR}, #{employeeage,jdbcType=INTEGER}, #{education,jdbcType=INTEGER}, 
+      #{politicsstatus,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{departmentid,jdbcType=INTEGER}, 
+      #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{postid,jdbcType=INTEGER}, 
+      #{time,jdbcType=TIMESTAMP}, #{currentname,jdbcType=VARCHAR}, #{employeestatus,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xr.smoke.entity.Employee">
+    insert into employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="employeeid != null">
+        employeeId,
+      </if>
+      <if test="employeename != null">
+        employeeName,
+      </if>
+      <if test="employeesex != null">
+        employeeSex,
+      </if>
+      <if test="employeeage != null">
+        employeeAge,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
+      <if test="politicsstatus != null">
+        politicsStatus,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="departmentid != null">
+        departmentID,
+      </if>
+      <if test="account != null">
+        Account,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="postid != null">
+        postId,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="currentname != null">
+        currentName,
+      </if>
+      <if test="employeestatus != null">
+        employeeStatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="employeeid != null">
+        #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="employeename != null">
+        #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="employeesex != null">
+        #{employeesex,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeage != null">
+        #{employeeage,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=INTEGER},
+      </if>
+      <if test="politicsstatus != null">
+        #{politicsstatus,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="postid != null">
+        #{postid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentname != null">
+        #{currentname,jdbcType=VARCHAR},
+      </if>
+      <if test="employeestatus != null">
+        #{employeestatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xr.smoke.entity.EmployeeExample" resultType="java.lang.Long">
+    select count(*) from employee
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update employee
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeeid != null">
+        employeeId = #{record.employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="record.employeename != null">
+        employeeName = #{record.employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeesex != null">
+        employeeSex = #{record.employeesex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeeage != null">
+        employeeAge = #{record.employeeage,jdbcType=INTEGER},
+      </if>
+      <if test="record.education != null">
+        education = #{record.education,jdbcType=INTEGER},
+      </if>
+      <if test="record.politicsstatus != null">
+        politicsStatus = #{record.politicsstatus,jdbcType=INTEGER},
+      </if>
+      <if test="record.phone != null">
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentid != null">
+        departmentID = #{record.departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.account != null">
+        Account = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.postid != null">
+        postId = #{record.postid,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.currentname != null">
+        currentName = #{record.currentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.employeestatus != null">
+        employeeStatus = #{record.employeestatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update employee
+    set id = #{record.id,jdbcType=INTEGER},
+      employeeId = #{record.employeeid,jdbcType=INTEGER},
+      employeeName = #{record.employeename,jdbcType=VARCHAR},
+      employeeSex = #{record.employeesex,jdbcType=VARCHAR},
+      employeeAge = #{record.employeeage,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=INTEGER},
+      politicsStatus = #{record.politicsstatus,jdbcType=INTEGER},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      departmentID = #{record.departmentid,jdbcType=INTEGER},
+      Account = #{record.account,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      postId = #{record.postid,jdbcType=INTEGER},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      currentName = #{record.currentname,jdbcType=VARCHAR},
+      employeeStatus = #{record.employeestatus,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xr.smoke.entity.Employee">
+    update employee
+    <set>
+      <if test="employeeid != null">
+        employeeId = #{employeeid,jdbcType=INTEGER},
+      </if>
+      <if test="employeename != null">
+        employeeName = #{employeename,jdbcType=VARCHAR},
+      </if>
+      <if test="employeesex != null">
+        employeeSex = #{employeesex,jdbcType=VARCHAR},
+      </if>
+      <if test="employeeage != null">
+        employeeAge = #{employeeage,jdbcType=INTEGER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=INTEGER},
+      </if>
+      <if test="politicsstatus != null">
+        politicsStatus = #{politicsstatus,jdbcType=INTEGER},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentid != null">
+        departmentID = #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="account != null">
+        Account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="postid != null">
+        postId = #{postid,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentname != null">
+        currentName = #{currentname,jdbcType=VARCHAR},
+      </if>
+      <if test="employeestatus != null">
+        employeeStatus = #{employeestatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xr.smoke.entity.Employee">
+    update employee
+    set employeeId = #{employeeid,jdbcType=INTEGER},
+      employeeName = #{employeename,jdbcType=VARCHAR},
+      employeeSex = #{employeesex,jdbcType=VARCHAR},
+      employeeAge = #{employeeage,jdbcType=INTEGER},
+      education = #{education,jdbcType=INTEGER},
+      politicsStatus = #{politicsstatus,jdbcType=INTEGER},
+      phone = #{phone,jdbcType=VARCHAR},
+      departmentID = #{departmentid,jdbcType=INTEGER},
+      Account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      postId = #{postid,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      currentName = #{currentname,jdbcType=VARCHAR},
+      employeeStatus = #{employeestatus,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xr.smoke.mapper.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.xr.smoke.entity.Report">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="visitId" jdbcType="INTEGER" property="visitid" />
+    <result column="creationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="visitor" jdbcType="VARCHAR" property="visitor" />
+    <result column="visitorDepartment" jdbcType="VARCHAR" property="visitordepartment" />
+    <result column="visitPost" jdbcType="VARCHAR" property="visitpost" />
+    <result column="defendant" jdbcType="VARCHAR" property="defendant" />
+    <result column="defendantDepartment" jdbcType="VARCHAR" property="defendantdepartment" />
+    <result column="defendantPost" jdbcType="VARCHAR" property="defendantpost" />
+    <result column="visitContent" jdbcType="VARCHAR" property="visitcontent" />
+    <result column="visitDigest" jdbcType="VARCHAR" property="visitdigest" />
+    <result column="departmentOpinion" jdbcType="VARCHAR" property="departmentopinion" />
+    <result column="signingcreationTime" jdbcType="TIMESTAMP" property="signingcreationtime" />
+    <result column="groupOpinion" jdbcType="VARCHAR" property="groupopinion" />
+    <result column="groupSigningcreationTime" jdbcType="TIMESTAMP" property="groupsigningcreationtime" />
+    <result column="leaderOpinion" jdbcType="VARCHAR" property="leaderopinion" />
+    <result column="leaderSigningcreationTime" jdbcType="TIMESTAMP" property="leadersigningcreationtime" />
+    <result column="departmentReult" jdbcType="VARCHAR" property="departmentreult" />
+    <result column="departmentReultcreationTime" jdbcType="TIMESTAMP" property="departmentreultcreationtime" />
+    <result column="result" jdbcType="VARCHAR" property="result" />
+    <result column="datecreationTime" jdbcType="TIMESTAMP" property="datecreationtime" />
+    <result column="foundcreationTime" jdbcType="TIMESTAMP" property="foundcreationtime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, visitId, creationTime, visitor, visitorDepartment, visitPost, defendant, defendantDepartment, 
+    defendantPost, visitContent, visitDigest, departmentOpinion, signingcreationTime, 
+    groupOpinion, groupSigningcreationTime, leaderOpinion, leaderSigningcreationTime, 
+    departmentReult, departmentReultcreationTime, result, datecreationTime, foundcreationTime, 
+    creator, state
+  </sql>
+  <select id="selectByExample" parameterType="com.xr.smoke.entity.ReportExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from report
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xr.smoke.entity.ReportExample">
+    delete from report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xr.smoke.entity.Report">
+    insert into report (id, visitId, creationTime, 
+      visitor, visitorDepartment, visitPost, 
+      defendant, defendantDepartment, defendantPost, 
+      visitContent, visitDigest, departmentOpinion, 
+      signingcreationTime, groupOpinion, groupSigningcreationTime, 
+      leaderOpinion, leaderSigningcreationTime, 
+      departmentReult, departmentReultcreationTime, 
+      result, datecreationTime, foundcreationTime, 
+      creator, state)
+    values (#{id,jdbcType=INTEGER}, #{visitid,jdbcType=INTEGER}, #{creationtime,jdbcType=TIMESTAMP}, 
+      #{visitor,jdbcType=VARCHAR}, #{visitordepartment,jdbcType=VARCHAR}, #{visitpost,jdbcType=VARCHAR}, 
+      #{defendant,jdbcType=VARCHAR}, #{defendantdepartment,jdbcType=VARCHAR}, #{defendantpost,jdbcType=VARCHAR}, 
+      #{visitcontent,jdbcType=VARCHAR}, #{visitdigest,jdbcType=VARCHAR}, #{departmentopinion,jdbcType=VARCHAR}, 
+      #{signingcreationtime,jdbcType=TIMESTAMP}, #{groupopinion,jdbcType=VARCHAR}, #{groupsigningcreationtime,jdbcType=TIMESTAMP}, 
+      #{leaderopinion,jdbcType=VARCHAR}, #{leadersigningcreationtime,jdbcType=TIMESTAMP}, 
+      #{departmentreult,jdbcType=VARCHAR}, #{departmentreultcreationtime,jdbcType=TIMESTAMP}, 
+      #{result,jdbcType=VARCHAR}, #{datecreationtime,jdbcType=TIMESTAMP}, #{foundcreationtime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xr.smoke.entity.Report">
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="visitid != null">
+        visitId,
+      </if>
+      <if test="creationtime != null">
+        creationTime,
+      </if>
+      <if test="visitor != null">
+        visitor,
+      </if>
+      <if test="visitordepartment != null">
+        visitorDepartment,
+      </if>
+      <if test="visitpost != null">
+        visitPost,
+      </if>
+      <if test="defendant != null">
+        defendant,
+      </if>
+      <if test="defendantdepartment != null">
+        defendantDepartment,
+      </if>
+      <if test="defendantpost != null">
+        defendantPost,
+      </if>
+      <if test="visitcontent != null">
+        visitContent,
+      </if>
+      <if test="visitdigest != null">
+        visitDigest,
+      </if>
+      <if test="departmentopinion != null">
+        departmentOpinion,
+      </if>
+      <if test="signingcreationtime != null">
+        signingcreationTime,
+      </if>
+      <if test="groupopinion != null">
+        groupOpinion,
+      </if>
+      <if test="groupsigningcreationtime != null">
+        groupSigningcreationTime,
+      </if>
+      <if test="leaderopinion != null">
+        leaderOpinion,
+      </if>
+      <if test="leadersigningcreationtime != null">
+        leaderSigningcreationTime,
+      </if>
+      <if test="departmentreult != null">
+        departmentReult,
+      </if>
+      <if test="departmentreultcreationtime != null">
+        departmentReultcreationTime,
+      </if>
+      <if test="result != null">
+        result,
+      </if>
+      <if test="datecreationtime != null">
+        datecreationTime,
+      </if>
+      <if test="foundcreationtime != null">
+        foundcreationTime,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="visitid != null">
+        #{visitid,jdbcType=INTEGER},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitor != null">
+        #{visitor,jdbcType=VARCHAR},
+      </if>
+      <if test="visitordepartment != null">
+        #{visitordepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="visitpost != null">
+        #{visitpost,jdbcType=VARCHAR},
+      </if>
+      <if test="defendant != null">
+        #{defendant,jdbcType=VARCHAR},
+      </if>
+      <if test="defendantdepartment != null">
+        #{defendantdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="defendantpost != null">
+        #{defendantpost,jdbcType=VARCHAR},
+      </if>
+      <if test="visitcontent != null">
+        #{visitcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="visitdigest != null">
+        #{visitdigest,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentopinion != null">
+        #{departmentopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="signingcreationtime != null">
+        #{signingcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupopinion != null">
+        #{groupopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsigningcreationtime != null">
+        #{groupsigningcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaderopinion != null">
+        #{leaderopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="leadersigningcreationtime != null">
+        #{leadersigningcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departmentreult != null">
+        #{departmentreult,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentreultcreationtime != null">
+        #{departmentreultcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null">
+        #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="datecreationtime != null">
+        #{datecreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="foundcreationtime != null">
+        #{foundcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xr.smoke.entity.ReportExample" resultType="java.lang.Long">
+    select count(*) from report
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update report
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.visitid != null">
+        visitId = #{record.visitid,jdbcType=INTEGER},
+      </if>
+      <if test="record.creationtime != null">
+        creationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.visitor != null">
+        visitor = #{record.visitor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitordepartment != null">
+        visitorDepartment = #{record.visitordepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitpost != null">
+        visitPost = #{record.visitpost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defendant != null">
+        defendant = #{record.defendant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defendantdepartment != null">
+        defendantDepartment = #{record.defendantdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defendantpost != null">
+        defendantPost = #{record.defendantpost,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitcontent != null">
+        visitContent = #{record.visitcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitdigest != null">
+        visitDigest = #{record.visitdigest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentopinion != null">
+        departmentOpinion = #{record.departmentopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signingcreationtime != null">
+        signingcreationTime = #{record.signingcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.groupopinion != null">
+        groupOpinion = #{record.groupopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupsigningcreationtime != null">
+        groupSigningcreationTime = #{record.groupsigningcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaderopinion != null">
+        leaderOpinion = #{record.leaderopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.leadersigningcreationtime != null">
+        leaderSigningcreationTime = #{record.leadersigningcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.departmentreult != null">
+        departmentReult = #{record.departmentreult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentreultcreationtime != null">
+        departmentReultcreationTime = #{record.departmentreultcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.result != null">
+        result = #{record.result,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datecreationtime != null">
+        datecreationTime = #{record.datecreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.foundcreationtime != null">
+        foundcreationTime = #{record.foundcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update report
+    set id = #{record.id,jdbcType=INTEGER},
+      visitId = #{record.visitid,jdbcType=INTEGER},
+      creationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      visitor = #{record.visitor,jdbcType=VARCHAR},
+      visitorDepartment = #{record.visitordepartment,jdbcType=VARCHAR},
+      visitPost = #{record.visitpost,jdbcType=VARCHAR},
+      defendant = #{record.defendant,jdbcType=VARCHAR},
+      defendantDepartment = #{record.defendantdepartment,jdbcType=VARCHAR},
+      defendantPost = #{record.defendantpost,jdbcType=VARCHAR},
+      visitContent = #{record.visitcontent,jdbcType=VARCHAR},
+      visitDigest = #{record.visitdigest,jdbcType=VARCHAR},
+      departmentOpinion = #{record.departmentopinion,jdbcType=VARCHAR},
+      signingcreationTime = #{record.signingcreationtime,jdbcType=TIMESTAMP},
+      groupOpinion = #{record.groupopinion,jdbcType=VARCHAR},
+      groupSigningcreationTime = #{record.groupsigningcreationtime,jdbcType=TIMESTAMP},
+      leaderOpinion = #{record.leaderopinion,jdbcType=VARCHAR},
+      leaderSigningcreationTime = #{record.leadersigningcreationtime,jdbcType=TIMESTAMP},
+      departmentReult = #{record.departmentreult,jdbcType=VARCHAR},
+      departmentReultcreationTime = #{record.departmentreultcreationtime,jdbcType=TIMESTAMP},
+      result = #{record.result,jdbcType=VARCHAR},
+      datecreationTime = #{record.datecreationtime,jdbcType=TIMESTAMP},
+      foundcreationTime = #{record.foundcreationtime,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xr.smoke.entity.Report">
+    update report
+    <set>
+      <if test="visitid != null">
+        visitId = #{visitid,jdbcType=INTEGER},
+      </if>
+      <if test="creationtime != null">
+        creationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="visitor != null">
+        visitor = #{visitor,jdbcType=VARCHAR},
+      </if>
+      <if test="visitordepartment != null">
+        visitorDepartment = #{visitordepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="visitpost != null">
+        visitPost = #{visitpost,jdbcType=VARCHAR},
+      </if>
+      <if test="defendant != null">
+        defendant = #{defendant,jdbcType=VARCHAR},
+      </if>
+      <if test="defendantdepartment != null">
+        defendantDepartment = #{defendantdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="defendantpost != null">
+        defendantPost = #{defendantpost,jdbcType=VARCHAR},
+      </if>
+      <if test="visitcontent != null">
+        visitContent = #{visitcontent,jdbcType=VARCHAR},
+      </if>
+      <if test="visitdigest != null">
+        visitDigest = #{visitdigest,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentopinion != null">
+        departmentOpinion = #{departmentopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="signingcreationtime != null">
+        signingcreationTime = #{signingcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="groupopinion != null">
+        groupOpinion = #{groupopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="groupsigningcreationtime != null">
+        groupSigningcreationTime = #{groupsigningcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaderopinion != null">
+        leaderOpinion = #{leaderopinion,jdbcType=VARCHAR},
+      </if>
+      <if test="leadersigningcreationtime != null">
+        leaderSigningcreationTime = #{leadersigningcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departmentreult != null">
+        departmentReult = #{departmentreult,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentreultcreationtime != null">
+        departmentReultcreationTime = #{departmentreultcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="result != null">
+        result = #{result,jdbcType=VARCHAR},
+      </if>
+      <if test="datecreationtime != null">
+        datecreationTime = #{datecreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="foundcreationtime != null">
+        foundcreationTime = #{foundcreationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xr.smoke.entity.Report">
+    update report
+    set visitId = #{visitid,jdbcType=INTEGER},
+      creationTime = #{creationtime,jdbcType=TIMESTAMP},
+      visitor = #{visitor,jdbcType=VARCHAR},
+      visitorDepartment = #{visitordepartment,jdbcType=VARCHAR},
+      visitPost = #{visitpost,jdbcType=VARCHAR},
+      defendant = #{defendant,jdbcType=VARCHAR},
+      defendantDepartment = #{defendantdepartment,jdbcType=VARCHAR},
+      defendantPost = #{defendantpost,jdbcType=VARCHAR},
+      visitContent = #{visitcontent,jdbcType=VARCHAR},
+      visitDigest = #{visitdigest,jdbcType=VARCHAR},
+      departmentOpinion = #{departmentopinion,jdbcType=VARCHAR},
+      signingcreationTime = #{signingcreationtime,jdbcType=TIMESTAMP},
+      groupOpinion = #{groupopinion,jdbcType=VARCHAR},
+      groupSigningcreationTime = #{groupsigningcreationtime,jdbcType=TIMESTAMP},
+      leaderOpinion = #{leaderopinion,jdbcType=VARCHAR},
+      leaderSigningcreationTime = #{leadersigningcreationtime,jdbcType=TIMESTAMP},
+      departmentReult = #{departmentreult,jdbcType=VARCHAR},
+      departmentReultcreationTime = #{departmentreultcreationtime,jdbcType=TIMESTAMP},
+      result = #{result,jdbcType=VARCHAR},
+      datecreationTime = #{datecreationtime,jdbcType=TIMESTAMP},
+      foundcreationTime = #{foundcreationtime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

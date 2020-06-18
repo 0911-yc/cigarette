@@ -1,10 +1,13 @@
 package com.xr.smoke.controller;
 
 import com.xr.smoke.entity.Administrator;
+import com.xr.smoke.entity.Institution;
 import com.xr.smoke.service.AdminUserService;
+import com.xr.smoke.service.InstitutionService;
 import com.xr.smoke.util.ResponseResult;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,9 @@ public class AdminUserController {
     @Autowired
     private AdminUserService adminUserService;
 
+    //部门
+    @Autowired
+    private InstitutionService institutionService;
     @RequestMapping("info")
     public ResponseResult info(String token){
         Subject subject = SecurityUtils.getSubject();
@@ -69,5 +75,44 @@ public class AdminUserController {
         return result;
     }
 
+
+    //部门
+    @RequestMapping("list")
+    @RequiresPermissions("user:list")
+    public ResponseResult list(Integer page,Integer limit){
+        List<Institution> list = institutionService.list();
+        ResponseResult result = new ResponseResult();
+        result.getData().put("items",list);
+        result.getData().put("total",list.size());
+        System.out.println(list.size());
+        return result;
+    }
+
+    @RequestMapping("add")
+    @RequiresPermissions("user:add")
+    public ResponseResult add(Institution institution){
+        institutionService.add(institution);
+        ResponseResult result = new ResponseResult();
+        result.getData().put("message","添加成功");
+        return result;
+    }
+
+    @RequestMapping("update")
+    @RequiresPermissions("user:update")
+    public ResponseResult update(Institution institution){
+        institutionService.update(institution);
+        ResponseResult result = new ResponseResult();
+        result.getData().put("message","修改成功");
+        return result;
+    }
+
+    @RequestMapping("delete")
+    @RequiresPermissions("user:delete")
+    public ResponseResult add(Integer id){
+        institutionService.deleteById(id);
+        ResponseResult result = new ResponseResult();
+        result.getData().put("message","删除成功");
+        return result;
+    }
 
 }

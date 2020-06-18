@@ -15,7 +15,6 @@ public  class SmokeApplicationTests {
 
     @Test
     public void contextLoads() {
-
     }
 
 }

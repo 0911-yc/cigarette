@@ -64,18 +64,18 @@ export const asyncRoutes = [
   {
     path: '/permission',
     component: Layout,
-    redirect: 'noRedirect',
+    redirect: '/permission/page',
     alwaysShow: true,
     name: 'Permission',
     meta: {
       title: '系统管理',
       icon: 'lock',
-      roles: ['admin', 'editor']
+      roles: ['超级管理员']
     },
     children: [
       {
         path: 'organization',
-        component: () => import('@/views/permission/organization'),
+        component: () => import('@/views/Myvue/organization'),
         name: 'Organization ',
         meta: {
           title: '机构管理'
