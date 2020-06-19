@@ -64,18 +64,18 @@ export const asyncRoutes = [
   {
     path: '/permission',
     component: Layout,
-    redirect: 'noRedirect',
+    redirect: '/permission/page',
     alwaysShow: true,
     name: 'Permission',
     meta: {
       title: '系统管理',
       icon: 'lock',
-      roles: ['admin', 'editor']
+      roles: ['超级管理员']
     },
     children: [
       {
         path: 'organization',
-        component: () => import('@/views/permission/organization'),
+        component: () => import('@/views/Myvue/organization'),
         name: 'Organization ',
         meta: {
           title: '机构管理'
@@ -136,15 +136,15 @@ export const asyncRoutes = [
         path: 'eduAdd',
         component: () => import('@/views/government/eduAdd'),
         name: 'eduAdd',
-        meta: { title: '添加', noCache: true , activeMenu:'@/views/government/education'},
-        hidden:true
+        meta: { title: '添加', noCache: true, activeMenu: '@/views/government/education' },
+        hidden: true
       },
       {
         path: 'eduUpdate',
         component: () => import('@/views/government/eduUpdate'),
         name: 'eduUpdate',
-        meta: { title: '修改', noCache: true , activeMenu:'@/views/government/education'},
-        hidden:true
+        meta: { title: '修改', noCache: true, activeMenu: '@/views/government/education' },
+        hidden: true
       }
     ]
   },

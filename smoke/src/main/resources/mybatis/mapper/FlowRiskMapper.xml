@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xr.smoke.mapper.FlowRiskMapper">
+  <resultMap id="BaseResultMap" type="com.xr.smoke.entity.FlowRisk">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="flowRiskId" jdbcType="INTEGER" property="flowriskid" />
+    <result column="flowRiskName" jdbcType="VARCHAR" property="flowriskname" />
+    <result column="flowRiskYear" jdbcType="VARCHAR" property="flowriskyear" />
+    <result column="flowRiskInformation" jdbcType="VARCHAR" property="flowriskinformation" />
+    <result column="accessory" jdbcType="VARCHAR" property="accessory" />
+    <result column="creationTime" jdbcType="TIMESTAMP" property="creationtime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, flowRiskId, flowRiskName, flowRiskYear, flowRiskInformation, accessory, creationTime, 
+    creator, state
+  </sql>
+  <select id="selectByExample" parameterType="com.xr.smoke.entity.FlowRiskExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from flowRisk
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from flowRisk
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from flowRisk
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.xr.smoke.entity.FlowRiskExample">
+    delete from flowRisk
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.xr.smoke.entity.FlowRisk">
+    insert into flowRisk (id, flowRiskId, flowRiskName, 
+      flowRiskYear, flowRiskInformation, accessory, 
+      creationTime, creator, state
+      )
+    values (#{id,jdbcType=INTEGER}, #{flowriskid,jdbcType=INTEGER}, #{flowriskname,jdbcType=VARCHAR}, 
+      #{flowriskyear,jdbcType=VARCHAR}, #{flowriskinformation,jdbcType=VARCHAR}, #{accessory,jdbcType=VARCHAR}, 
+      #{creationtime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xr.smoke.entity.FlowRisk">
+    insert into flowRisk
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="flowriskid != null">
+        flowRiskId,
+      </if>
+      <if test="flowriskname != null">
+        flowRiskName,
+      </if>
+      <if test="flowriskyear != null">
+        flowRiskYear,
+      </if>
+      <if test="flowriskinformation != null">
+        flowRiskInformation,
+      </if>
+      <if test="accessory != null">
+        accessory,
+      </if>
+      <if test="creationtime != null">
+        creationTime,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="flowriskid != null">
+        #{flowriskid,jdbcType=INTEGER},
+      </if>
+      <if test="flowriskname != null">
+        #{flowriskname,jdbcType=VARCHAR},
+      </if>
+      <if test="flowriskyear != null">
+        #{flowriskyear,jdbcType=VARCHAR},
+      </if>
+      <if test="flowriskinformation != null">
+        #{flowriskinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="accessory != null">
+        #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.xr.smoke.entity.FlowRiskExample" resultType="java.lang.Long">
+    select count(*) from flowRisk
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update flowRisk
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.flowriskid != null">
+        flowRiskId = #{record.flowriskid,jdbcType=INTEGER},
+      </if>
+      <if test="record.flowriskname != null">
+        flowRiskName = #{record.flowriskname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowriskyear != null">
+        flowRiskYear = #{record.flowriskyear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.flowriskinformation != null">
+        flowRiskInformation = #{record.flowriskinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessory != null">
+        accessory = #{record.accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="record.creationtime != null">
+        creationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.creator != null">
+        creator = #{record.creator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update flowRisk
+    set id = #{record.id,jdbcType=INTEGER},
+      flowRiskId = #{record.flowriskid,jdbcType=INTEGER},
+      flowRiskName = #{record.flowriskname,jdbcType=VARCHAR},
+      flowRiskYear = #{record.flowriskyear,jdbcType=VARCHAR},
+      flowRiskInformation = #{record.flowriskinformation,jdbcType=VARCHAR},
+      accessory = #{record.accessory,jdbcType=VARCHAR},
+      creationTime = #{record.creationtime,jdbcType=TIMESTAMP},
+      creator = #{record.creator,jdbcType=VARCHAR},
+      state = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xr.smoke.entity.FlowRisk">
+    update flowRisk
+    <set>
+      <if test="flowriskid != null">
+        flowRiskId = #{flowriskid,jdbcType=INTEGER},
+      </if>
+      <if test="flowriskname != null">
+        flowRiskName = #{flowriskname,jdbcType=VARCHAR},
+      </if>
+      <if test="flowriskyear != null">
+        flowRiskYear = #{flowriskyear,jdbcType=VARCHAR},
+      </if>
+      <if test="flowriskinformation != null">
+        flowRiskInformation = #{flowriskinformation,jdbcType=VARCHAR},
+      </if>
+      <if test="accessory != null">
+        accessory = #{accessory,jdbcType=VARCHAR},
+      </if>
+      <if test="creationtime != null">
+        creationTime = #{creationtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xr.smoke.entity.FlowRisk">
+    update flowRisk
+    set flowRiskId = #{flowriskid,jdbcType=INTEGER},
+      flowRiskName = #{flowriskname,jdbcType=VARCHAR},
+      flowRiskYear = #{flowriskyear,jdbcType=VARCHAR},
+      flowRiskInformation = #{flowriskinformation,jdbcType=VARCHAR},
+      accessory = #{accessory,jdbcType=VARCHAR},
+      creationTime = #{creationtime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
