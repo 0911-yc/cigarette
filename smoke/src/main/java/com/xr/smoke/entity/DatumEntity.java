@@ -1,9 +1,11 @@
 package com.xr.smoke.entity;
 
+import org.springframework.stereotype.Component;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
-
+@Component
 public class DatumEntity {
     private int id;
     private String title;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xr.smoke.mapper.DatumMapper">
+    <resultMap id="datMap" type="com.xr.smoke.entity.DatumEntity">
+        <id column="id" jdbcType="INTEGER" property="id"></id>
+        <result column="title" jdbcType="VARCHAR" property="title"></result>
+        <result column="fileName" jdbcType="VARCHAR" property="fileName"></result>
+        <result column="file" jdbcType="VARCHAR" property="file"></result>
+        <result column="creationTime" jdbcType="VARCHAR" property="creationTime"></result>
+        <result column="creator" jdbcType="VARCHAR" property="creator"></result>
+        <result column="status" jdbcType="VARCHAR" property="status"></result>
+    </resultMap>
+
+    <select id="datList" resultMap="datMap">
+        select id,title,fileName,creator,creationTime from datum
+    </select>
+</mapper>

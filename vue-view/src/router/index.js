@@ -128,9 +128,23 @@ export const asyncRoutes = [
     children: [
       {
         path: 'government',
-        component: () => import('@/views/government/government'),
+        component: () => import('@/views/government/education'),
         name: 'Government',
         meta: { title: '廉政教育', noCache: true }
+      },
+      {
+        path: 'eduAdd',
+        component: () => import('@/views/government/eduAdd'),
+        name: 'eduAdd',
+        meta: { title: '添加', noCache: true , activeMenu:'@/views/government/education'},
+        hidden:true
+      },
+      {
+        path: 'eduUpdate',
+        component: () => import('@/views/government/eduUpdate'),
+        name: 'eduUpdate',
+        meta: { title: '修改', noCache: true , activeMenu:'@/views/government/education'},
+        hidden:true
       }
     ]
   },
