@@ -38,7 +38,7 @@ public class DeployController {
         }catch (ParseException e){
             e.printStackTrace();
         }
-        deploy.setCreationtime(time);
+        deploy.setCreationTime(time);
         deployService.add(deploy);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","添加成功");
@@ -60,5 +60,4 @@ public class DeployController {
         result.getData().put("message","删除成功");
         return result;
     }
-
 }

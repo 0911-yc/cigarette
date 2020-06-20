@@ -44,7 +44,7 @@
 
       <el-table-column label="创建时间" width="150px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.creationtime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ scope.row.creationTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
 
@@ -65,7 +65,7 @@
     <!--  绑定了title，是一个数组里取的，表示是修改的标题还是添加的标题
       visible.sync 对话框是否显示
     -->
-    <el-dialog :title="title" :fullscreen="true" :visible.sync="dialogFormVisible" style="width: 80%">
+    <el-dialog :title="title" :visible.sync="dialogFormVisible" style="width: 80%">
       <!--
           rules:校验规则
           model:数据绑定
@@ -81,6 +81,9 @@
         <el-form-item label="创建者" prop="creator">
           <el-input placeholder="请输入创建者" v-model="temp.creator"></el-input>
         </el-form-item>
+<!--        <el-form-item label="创建时间" prop="creationtime">-->
+<!--          <el-input placeholder="请输入创建时间" v-model="temp.creationtime"></el-input>-->
+<!--        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">
@@ -122,6 +125,7 @@
           title: '',
           content: '',
           creator: '',
+          creationTime: ''
         },
         title: '添加', // 对话框显示的提示 根据dialogStatus create
         dialogFormVisible: false, // 是否显示对话框
@@ -163,6 +167,7 @@
           title: '',
           content: '',
           creator: '',
+          creationTime: ''
         }
       },
       // 显示添加的对话框

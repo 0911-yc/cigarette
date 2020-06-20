@@ -2,21 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad70d291-11ca-4413-9d88-5bb4f0d949df" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/controller/ReportController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/service/ReportService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/service/impl/ReportServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue-view/src/api/sys/report.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/controller/DutyController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/controller/PoliticianTalkController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/service/DutyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/service/impl/DutyServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/service/impl/PoliticianTalkServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-view/src/api/sys/duty.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/vue-view/src/api/sys/politicianTalk.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cigarette.lnk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/mapper/ReportMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/mapper/ReportMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/controller/DeployController.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/controller/DeployController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/controller/WorkPlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/controller/WorkPlanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/Deploy.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/Deploy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/Duty.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/Duty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/PoliticianTalk.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/PoliticianTalk.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/WorkPlan.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/entity/WorkPlan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/mapper/DeployMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/mapper/DeployMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/mapper/DutyMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/mapper/DutyMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/mapper/WorkPlanMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/smoke/src/main/java/com/xr/smoke/mapper/WorkPlanMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vue-view/src/components/Pagination/index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-view/src/components/Pagination/index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vue-view/src/views/daily/report.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-view/src/views/daily/report.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vue-view/src/views/documentary/plan.vue" beforeDir="false" afterPath="$PROJECT_DIR$/vue-view/src/views/documentary/plan.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -24,14 +41,9 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/java/Apache/apache-maven-3.6.3" />
-        <option name="userSettingsFile" value="D:\java\Apache\apache-maven-3.6.3\conf\settings.xml" />
+        <option name="mavenHome" value="D:/Apache/apache-maven-3.6.1" />
+        <option name="userSettingsFile" value="D:\Apache\apache-maven-3.6.1\conf\settings.xml" />
       </MavenGeneralSettings>
-    </option>
-    <option name="importingSettings">
-      <MavenImportingSettings>
-        <option name="importAutomatically" value="true" />
-      </MavenImportingSettings>
     </option>
   </component>
   <component name="ProjectId" id="1dY4vBXx1fnPnbxU8r0DaQrK3ss" />
@@ -49,23 +61,25 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/vue-view/src/views/daily" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/vue-view/src/api/sys" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\ideaworkspace\cigarette\vue-view\src\views\daily" />
-      <recent name="E:\ideaworkspace\cigarette\vue-view\src\api\sys" />
-      <recent name="E:\ideaworkspace\cigarette\smoke\src\main\java\com\xr\smoke\controller" />
-      <recent name="E:\ideaworkspace\cigarette\smoke\src\main\java\com\xr\smoke\service\impl" />
-      <recent name="E:\ideaworkspace\cigarette\smoke\src\main\java\com\xr\smoke\service" />
+      <recent name="E:\IDEA file\cigarette\vue-view\src\api\sys" />
+      <recent name="E:\IDEA file\cigarette\smoke\src\main\java\com\xr\smoke\controller" />
+      <recent name="E:\IDEA file\cigarette\smoke\src\main\java\com\xr\smoke\service\impl" />
+      <recent name="E:\IDEA file\cigarette\smoke\src\main\java\com\xr\smoke\service" />
     </key>
   </component>
   <component name="RunManager">
@@ -89,78 +103,83 @@
       <updated>1592588920294</updated>
       <workItem from="1592588922147" duration="272000" />
       <workItem from="1592589219807" duration="266000" />
-      <workItem from="1592589505588" duration="1702000" />
-      <workItem from="1592640453588" duration="48000" />
-      <workItem from="1592640506227" duration="4421000" />
-      <workItem from="1592666631670" duration="495000" />
+      <workItem from="1592589505588" duration="1869000" />
+      <workItem from="1592638654736" duration="3861000" />
+      <workItem from="1592662487172" duration="3139000" />
     </task>
+    <task id="LOCAL-00001" summary="sm第一次上传">
+      <created>1592591301448</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592591301448</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="sm第一次上传" />
+    <option name="LAST_COMMIT_MESSAGE" value="sm第一次上传" />
   </component>
   <component name="WindowStateProjectService">
     <state x="201" y="39" key="#Project_Structure" timestamp="1592589279299">
       <screen x="0" y="0" width="1440" height="929" />
     </state>
     <state x="201" y="39" key="#Project_Structure/0.0.1440.929@0.0.1440.929" timestamp="1592589279299" />
-    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1592642102023">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="526" y="170" key="#com.intellij.ide.util.MemberChooser" timestamp="1592664319860">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state x="499" y="162" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1592642102023" />
-    <state x="534" y="194" key="FileChooserDialogImpl" timestamp="1592640523188">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="526" y="170" key="#com.intellij.ide.util.MemberChooser/0.0.1440.929@0.0.1440.929" timestamp="1592664319860" />
+    <state x="220" y="26" key="CommitChangelistDialog2" timestamp="1592591295023">
+      <screen x="0" y="0" width="1440" height="929" />
+    </state>
+    <state x="220" y="26" key="CommitChangelistDialog2/0.0.1440.929@0.0.1440.929" timestamp="1592591295023" />
+    <state x="501" y="219" key="FileChooserDialogImpl" timestamp="1592588978941">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
     <state x="501" y="219" key="FileChooserDialogImpl/0.0.1440.929@0.0.1440.929" timestamp="1592588978941" />
-    <state x="534" y="194" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1592640523188" />
-    <state width="1493" height="203" key="GridCell.Tab.0.bottom" timestamp="1592655033666">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1397" height="497" key="GridCell.Tab.0.bottom" timestamp="1592653162216">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state width="1397" height="436" key="GridCell.Tab.0.bottom/0.0.1440.929@0.0.1440.929" timestamp="1592590802876" />
-    <state width="1493" height="203" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592655033666" />
-    <state width="1493" height="203" key="GridCell.Tab.0.center" timestamp="1592655033665">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1397" height="497" key="GridCell.Tab.0.bottom/0.0.1440.929@0.0.1440.929" timestamp="1592653162216" />
+    <state width="1397" height="497" key="GridCell.Tab.0.center" timestamp="1592653162216">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state width="1397" height="436" key="GridCell.Tab.0.center/0.0.1440.929@0.0.1440.929" timestamp="1592590802876" />
-    <state width="1493" height="203" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592655033665" />
-    <state width="1493" height="203" key="GridCell.Tab.0.left" timestamp="1592655033665">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1397" height="497" key="GridCell.Tab.0.center/0.0.1440.929@0.0.1440.929" timestamp="1592653162216" />
+    <state width="1397" height="497" key="GridCell.Tab.0.left" timestamp="1592653162216">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state width="1397" height="436" key="GridCell.Tab.0.left/0.0.1440.929@0.0.1440.929" timestamp="1592590802876" />
-    <state width="1493" height="203" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592655033665" />
-    <state width="1493" height="203" key="GridCell.Tab.0.right" timestamp="1592655033665">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1397" height="497" key="GridCell.Tab.0.left/0.0.1440.929@0.0.1440.929" timestamp="1592653162216" />
+    <state width="1397" height="497" key="GridCell.Tab.0.right" timestamp="1592653162216">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state width="1397" height="436" key="GridCell.Tab.0.right/0.0.1440.929@0.0.1440.929" timestamp="1592590802876" />
-    <state width="1493" height="203" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592655033665" />
-    <state width="1493" height="203" key="GridCell.Tab.1.bottom" timestamp="1592655033666">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1397" height="497" key="GridCell.Tab.0.right/0.0.1440.929@0.0.1440.929" timestamp="1592653162216" />
+    <state width="1397" height="497" key="GridCell.Tab.1.bottom" timestamp="1592653162216">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state width="1397" height="436" key="GridCell.Tab.1.bottom/0.0.1440.929@0.0.1440.929" timestamp="1592590802877" />
-    <state width="1493" height="203" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592655033666" />
-    <state width="1493" height="203" key="GridCell.Tab.1.center" timestamp="1592655033666">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1397" height="497" key="GridCell.Tab.1.bottom/0.0.1440.929@0.0.1440.929" timestamp="1592653162216" />
+    <state width="1397" height="497" key="GridCell.Tab.1.center" timestamp="1592653162216">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state width="1397" height="436" key="GridCell.Tab.1.center/0.0.1440.929@0.0.1440.929" timestamp="1592590802876" />
-    <state width="1493" height="203" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1592655033666" />
-    <state width="1493" height="203" key="GridCell.Tab.1.left" timestamp="1592655033666">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1397" height="497" key="GridCell.Tab.1.center/0.0.1440.929@0.0.1440.929" timestamp="1592653162216" />
+    <state width="1397" height="497" key="GridCell.Tab.1.left" timestamp="1592653162216">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state width="1397" height="436" key="GridCell.Tab.1.left/0.0.1440.929@0.0.1440.929" timestamp="1592590802876" />
-    <state width="1493" height="203" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1592655033666" />
-    <state width="1493" height="203" key="GridCell.Tab.1.right" timestamp="1592655033666">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1397" height="497" key="GridCell.Tab.1.left/0.0.1440.929@0.0.1440.929" timestamp="1592653162216" />
+    <state width="1397" height="497" key="GridCell.Tab.1.right" timestamp="1592653162216">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state width="1397" height="436" key="GridCell.Tab.1.right/0.0.1440.929@0.0.1440.929" timestamp="1592590802876" />
-    <state width="1493" height="203" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1592655033666" />
-    <state x="237" y="97" key="SettingsEditor" timestamp="1592666733293">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1397" height="497" key="GridCell.Tab.1.right/0.0.1440.929@0.0.1440.929" timestamp="1592653162216" />
+    <state x="222" y="109" key="SettingsEditor" timestamp="1592588984882">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
     <state x="222" y="109" key="SettingsEditor/0.0.1440.929@0.0.1440.929" timestamp="1592588984882" />
-    <state x="237" y="97" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592666733293" />
-    <state x="461" y="240" key="com.intellij.ide.util.TipDialog" timestamp="1592666634522">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="313" y="198" key="Vcs.Push.Dialog.v2" timestamp="1592591330607">
+      <screen x="0" y="0" width="1440" height="929" />
     </state>
-    <state x="461" y="240" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1592666634522" />
+    <state x="313" y="198" key="Vcs.Push.Dialog.v2/0.0.1440.929@0.0.1440.929" timestamp="1592591330607" />
   </component>
 </project>
