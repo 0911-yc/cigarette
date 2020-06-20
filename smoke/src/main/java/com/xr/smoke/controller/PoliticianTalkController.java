@@ -1,7 +1,8 @@
 package com.xr.smoke.controller;
 
+import com.xr.smoke.entity.PoliticianTalk;
 import com.xr.smoke.entity.WorkPlan;
-import com.xr.smoke.service.WorkPlanService;
+import com.xr.smoke.service.PoliticianTalkService;
 import com.xr.smoke.util.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,15 +14,16 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("role")
-public class WorkPlanController {
+@RequestMapping("talk")
+public class PoliticianTalkController {
+
     @Autowired
-    private WorkPlanService workPlanService;
+    private PoliticianTalkService politicianTalkService;
 
     @RequestMapping("list")
-    public ResponseResult list(WorkPlan workPlan,Integer page,Integer limit){
-        List<WorkPlan> list = workPlanService.list(workPlan);
-        List<WorkPlan> list1 = workPlanService.list1(workPlan.getTitle(),(page-1)*limit,limit);
+    public ResponseResult list(PoliticianTalk politicianTalk, Integer page, Integer limit){
+        List<PoliticianTalk> list = politicianTalkService.list(politicianTalk);
+        List<PoliticianTalk> list1 = politicianTalkService.list1(politicianTalk.getTalkType(),(page-1)*limit,limit);
         ResponseResult result = new ResponseResult();
         result.getData().put("items",list1);
         result.getData().put("total",list.size());
@@ -29,7 +31,7 @@ public class WorkPlanController {
     }
 
     @RequestMapping("add")
-    public ResponseResult add(WorkPlan workPlan){
+    public ResponseResult add(PoliticianTalk politicianTalk){
         //获取系统当前时间
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date time=null;
@@ -38,16 +40,16 @@ public class WorkPlanController {
         }catch (ParseException e){
             e.printStackTrace();
         }
-        workPlan.setCreationTime(time);
-        workPlanService.add(workPlan);
+        politicianTalk.setTalkcreationTime(time);
+        politicianTalkService.add(politicianTalk);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","添加成功");
         return result;
     }
 
     @RequestMapping("update")
-    public ResponseResult update(WorkPlan workPlan){
-        workPlanService.update(workPlan);
+    public ResponseResult update(PoliticianTalk politicianTalk){
+        politicianTalkService.update(politicianTalk);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","修改成功");
         return result;
@@ -55,7 +57,7 @@ public class WorkPlanController {
 
     @RequestMapping("delete")
     public ResponseResult delete(int id){
-        workPlanService.delete(id);
+        politicianTalkService.delete(id);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","删除成功");
         return result;

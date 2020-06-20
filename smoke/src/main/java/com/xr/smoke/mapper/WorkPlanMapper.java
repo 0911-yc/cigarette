@@ -20,13 +20,13 @@ public interface WorkPlanMapper {
     @Select("select * from workPlan")
     public List<WorkPlan> list(WorkPlan workPlan);
 
-    @Insert("insert into workPlan(title,content,creationTime,creator,status) values (#{title},#{content},#{creationTime},#{creator},#{status})")
+    @Insert("insert into workPlan(title,content,creationTime,creator,status) values (#{title},#{content},NOW(),#{creator},#{status})")
     public void add(WorkPlan workPlan);
 
     @Delete("delete from workPlan where id=#{id}")
     public void delete(int id);
 
-    @Update("update workPlan set title=#{title},content=#{content},creationTime=#{creationTime},creator=#{creator},status=#{status} where id=#{id}")
+    @Update("update workPlan set title=#{title},content=#{content},creationTime=NOW(),creator=#{creator},status=#{status} where id=#{id}")
     public void update(WorkPlan workPlan);
 
     long countByExample(WorkPlanExample example);

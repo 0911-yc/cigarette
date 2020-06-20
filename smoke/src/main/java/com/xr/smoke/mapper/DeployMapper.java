@@ -20,15 +20,14 @@ public interface DeployMapper {
     @Select("select * from deploy")
     public List<Deploy> list(Deploy deploy);
 
-    @Insert("insert into deploy(title,content,creationTime,creator,status) values (#{title},#{content},#{creationTime},#{creator},#{status})")
+    @Insert("insert into deploy(title,content,creationTime,creator,status) values (#{title},#{content},NOW(),#{creator},#{status})")
     public void add(Deploy deploy);
 
     @Delete("delete from deploy where id=#{id}")
     public void delete(int id);
 
-    @Update("update deploy set title=#{title},content=#{content},creationTime=#{creationTime},creator=#{creator},status=#{status} where id=#{id}")
+    @Update("update deploy set title=#{title},content=#{content},creationTime=NOW(),creator=#{creator},status=#{status} where id=#{id}")
     public void update(Deploy deploy);
-
 
     long countByExample(DeployExample example);
 
