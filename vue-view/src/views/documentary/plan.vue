@@ -65,7 +65,7 @@
     <!--  绑定了title，是一个数组里取的，表示是修改的标题还是添加的标题
       visible.sync 对话框是否显示
     -->
-    <el-dialog :title="title" :visible.sync="dialogFormVisible" style="width: 80%">
+    <el-dialog :title="title" :fullscreen="true" :visible.sync="dialogFormVisible" style="width: 80%">
       <!--
           rules:校验规则
           model:数据绑定
@@ -76,7 +76,8 @@
           <el-input placeholder="请输入标题" v-model="temp.title"></el-input>
         </el-form-item>
         <el-form-item label="内容" prop="content">
-          <el-input placeholder="请输入内容" v-model="temp.content"></el-input>
+<!--          <el-input placeholder="请输入内容" v-model="temp.content"></el-input>-->
+          <VueUE v-model="temp.content" label-width="800px" ></VueUE>
         </el-form-item>
         <el-form-item label="创建者" prop="creator">
           <el-input placeholder="请输入创建者" v-model="temp.creator"></el-input>

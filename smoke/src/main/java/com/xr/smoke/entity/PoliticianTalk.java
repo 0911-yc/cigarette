@@ -26,6 +26,6 @@ public class PoliticianTalk implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd") // 后台传到前台的日期格式转换
     private Date datacreationTime;
     private String creator;
-    private Integer status;
+    private String status;
 
 }

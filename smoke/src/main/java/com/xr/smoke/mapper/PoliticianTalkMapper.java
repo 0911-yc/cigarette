@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PoliticianTalkMapper {
-    @Select({"<script>select * from politicianTalk where 1=1 " ,
+    @Select({"<script>select p.id id,talkType,talkcreationTime,talkSite,s.status status from politicianTalk p,status s where p.status = s.id and 1=1 " ,
             "<when test='!talkType.equals(\"\")'>",
             " and talkType like '%${talkType}%' ",
             "</when>",
@@ -17,7 +17,8 @@ public interface PoliticianTalkMapper {
             "</script>"})
     public List<PoliticianTalk> list1(@Param("talkType") String talkType, @Param("page") Integer page, @Param("limit") Integer limit);
 
-    @Select("select * from politicianTalk")
+//    @Select("select * from politicianTalk")
+    @Select("select p.id id,talkType,talkcreationTime,talkSite,s.status status from politicianTalk p,status s where p.status = s.id")
     public List<PoliticianTalk> list(PoliticianTalk politicianTalk);
 
     @Insert("insert into politicianTalk(talkName,talkDempartment,talkPoliticsStatus,talkDuty,talkType,talkcreationTime,talkSite,talkPerson,talkOutline,talkContent,datacreationTime,creator,status) values (#{talkName},#{talkDempartment},#{talkPoliticsStatus},#{talkDuty},#{talkType},#{talkcreationTime},#{talkSite},#{talkPerson},#{talkOutline},#{talkContent},#{datacreationTime},#{creator},#{status})")
