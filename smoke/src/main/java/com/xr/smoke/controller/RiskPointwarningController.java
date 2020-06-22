@@ -1,8 +1,9 @@
 package com.xr.smoke.controller;
 
-import com.xr.smoke.entity.Report;
-import com.xr.smoke.service.ReportService;
+import com.xr.smoke.entity.RiskPointwarning;
+import com.xr.smoke.service.RiskPointwarningService;
 import com.xr.smoke.util.ResponseResult;
+import com.xr.smoke.util.StringSubstring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,15 +14,15 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("report")
-public class ReportController {
+@RequestMapping("riskPointwarning")
+public class RiskPointwarningController {
     @Autowired
-    private ReportService reportService;
+    private RiskPointwarningService riskPointwarningService;
 
     @RequestMapping("list")
-    public ResponseResult list(Report report,Integer page,Integer limit){
-        List<Report> list = reportService.list(report);
-        List<Report> list1 = reportService.list1(report.getVisitor(),report.getDefendant(), (page - 1) * limit, limit);
+    public ResponseResult list(RiskPointwarning riskPointwarning, Integer page, Integer limit){
+        List<RiskPointwarning> list = riskPointwarningService.list(riskPointwarning);
+        List<RiskPointwarning> list1 = riskPointwarningService.list1(riskPointwarning.getTitle(),riskPointwarning.getContent(), (page - 1) * limit, limit);
         ResponseResult result = new ResponseResult();
         result.getData().put("items",list1);
         result.getData().put("total",list.size());
@@ -29,7 +30,9 @@ public class ReportController {
     }
 
     @RequestMapping("add")
-    public ResponseResult add(Report report){
+    public ResponseResult add(RiskPointwarning riskPointwarning){
+        StringSubstring stringSubstring = new StringSubstring();
+        riskPointwarning.setContent(stringSubstring.substring(riskPointwarning.getContent()));
         //获取系统当前时间
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String timestamp = new String(String.valueOf(System.currentTimeMillis()));
@@ -39,18 +42,17 @@ public class ReportController {
         }catch (ParseException e){
             e.printStackTrace();
         }
-        report.setVisitid(timestamp);
-        report.setCreationtime(time);
-        report.setFoundcreationtime(time);
-        reportService.add(report);
+        riskPointwarning.setNumber(timestamp);
+        riskPointwarning.setCreatetime(time);
+        riskPointwarningService.add(riskPointwarning);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","添加成功");
         return result;
     }
 
     @RequestMapping("update")
-    public ResponseResult update(Report report){
-        reportService.update(report);
+    public ResponseResult update(RiskPointwarning riskPointwarning){
+        riskPointwarningService.update(riskPointwarning);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","修改成功");
         return result;
@@ -58,7 +60,7 @@ public class ReportController {
 
     @RequestMapping("delete")
     public ResponseResult delete(Integer id){
-        reportService.delete(id);
+        riskPointwarningService.delete(id);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","删除成功");
         return result;

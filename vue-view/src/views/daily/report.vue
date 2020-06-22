@@ -87,7 +87,7 @@
     <!--  绑定了title，是一个数组里取的，表示是修改的标题还是添加的标题
       visible.sync 对话框是否显示
     -->
-    <el-dialog :title="title" :visible.sync="dialogFormVisible" style="width: 80%">
+    <el-dialog :fullscreen="true" :title="title" :visible.sync="dialogFormVisible" style="width: 100%">
       <!--
           rules:校验规则
           model:数据绑定
@@ -113,10 +113,10 @@
           <el-input v-model="temp.defendantpost" />
         </el-form-item>
         <el-form-item label="原始信访内容" prop="visitcontent">
-          <el-input v-model="temp.visitcontent" />
+          <el-input placeholder="....暂无内容" v-model="temp.visitcontent" />
         </el-form-item>
         <el-form-item label="信访内容摘要" prop="visitdigest">
-          <el-input v-model="temp.visitdigest" />
+          <el-input placeholder="....暂无内容" v-model="temp.visitdigest" />
         </el-form-item>
         <!--<el-form-item label="自我简介">
           <el-input
@@ -161,7 +161,7 @@
         listLoading: true, // 是否使用动画
         listQuery: {
           page: 1, // 分页需要的当前页
-          limit: 3, // 分页需要的每页显示多少条
+          limit: 5, // 分页需要的每页显示多少条
           sex: 1,
           username: ''
         },
@@ -183,7 +183,11 @@
         dialogStatus: '', // 表示表单是添加还是修改的
         rules: {
           // 校验规则
-          defendant: [{ required: true, message: '被反映人必填', trigger: 'blur' }]
+          defendant: [{ required: true, message: '请输入被反映人', trigger: 'blur' }],
+          defendantdepartment: [{ required: true, message: '请输入被反映人部门', trigger: 'blur' }],
+          defendantpost: [{ required: true, message: '请输入被反映人岗位', trigger: 'blur' }],
+          visitcontent: [{ required: true, message: '请输入原始信访内容', trigger: 'blur' }],
+          visitdigest: [{ required: true, message: '请输入信访内容摘要', trigger: 'blur' }],
         }
       }
     },

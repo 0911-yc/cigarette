@@ -27,8 +27,8 @@ public interface ReportMapper {
     public List<Report> list(Report report);
 
     //添加举报信息
-    @Insert("insert into report(creationTime,visitor,visitorDepartment,visitPost,defendant,defendantDepartment,defendantPost,visitContent,visitDigest,foundcreationTime,state)\n" +
-            "VALUES (NOW(),#{visitor},#{visitordepartment},#{visitpost},#{defendant},#{defendantdepartment},#{defendantpost},#{visitcontent},#{visitdigest},NOW(),1)")
+    @Insert("insert into report(visitId,creationTime,visitor,visitorDepartment,visitPost,defendant,defendantDepartment,defendantPost,visitContent,visitDigest,foundcreationTime,state)\n" +
+            "VALUES (#{visitid},NOW(),#{visitor},#{visitordepartment},#{visitpost},#{defendant},#{defendantdepartment},#{defendantpost},#{visitcontent},#{visitdigest},NOW(),1)")
     public void add(Report report);
 
     //删除举报信息
@@ -36,7 +36,6 @@ public interface ReportMapper {
     public void delete(Integer id);
 
     //修改举报信息
-    //signingcreationTime=NOW(),groupSigningcreationTime=NOW(),leaderSigningcreationTime=NOW(),departmentReultcreationTime=NOW(),datecreationTime=NOW()
     @Update("UPDATE report SET visitor=#{visitor},visitorDepartment=#{visitordepartment},visitPost=#{visitpost},defendant=#{defendant},defendantDepartment=#{defendantdepartment},defendantPost=#{defendantpost},visitContent=#{visitcontent},visitDigest=#{visitdigest} WHERE id=#{id}")
     public void update(Report report);
 

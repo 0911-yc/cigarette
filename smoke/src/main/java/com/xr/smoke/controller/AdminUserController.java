@@ -75,6 +75,15 @@ public class AdminUserController {
         return result;
     }
 
+    @RequestMapping("logout")
+    public ResponseResult logout(){
+        ResponseResult result = new ResponseResult();
+        Subject subject = SecurityUtils.getSubject();
+        // 只需调用shiro的logout方法就可以了
+        subject.logout();
+        return result;
+    }
+
 
     //部门
     @RequestMapping("list")

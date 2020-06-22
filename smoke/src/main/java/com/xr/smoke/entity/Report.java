@@ -11,7 +11,7 @@ import java.util.Date;
 public class Report implements Serializable {
     private Integer id;
 
-    private Integer visitid;
+    private String visitid;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd") // 前台传过来的日期格式转换
     @JsonFormat(pattern = "yyyy-MM-dd") // 后台传到前台的日期格式转换
