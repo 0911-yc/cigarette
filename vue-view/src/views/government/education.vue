@@ -3,19 +3,16 @@
     <div class="filter-container">
       <span style="margin-left: 2.7%">标题</span>
       <el-input v-model="listQuery.title" placeholder="请输入廉政教育标题" style="width: 200px;" class="filter-item"/>
-      <span style="margin-left: 25%">内容</span>
-      <el-input v-model="listQuery.content" placeholder="请输入廉政教育内容" style="width: 200px;" class="filter-item"/>
-      <br/>
-      <span>开始时间</span>
+      <span style="margin-left:8% ">开始时间</span>
       <el-date-picker placeholder="选择开始时间" style="width: 200px;" class="filter-item"></el-date-picker>
-      <span style="margin-left:22.6%">结束时间</span>
-      <el-date-picker placeholder="选择结束时间" style="width: 200px;" class="filter-item"></el-date-picker>
+      <span style="margin-left: 8%">内容</span>
+      <el-input v-model="listQuery.content" placeholder="请输入廉政教育内容" style="width: 200px;" class="filter-item"/>
       <br/>
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="addShow">
         添加
       </el-button>
 
-      <el-button style="margin-left: 65%" class="filter-item" type="primary" icon="el-icon-search" @click="getList">
+      <el-button style="margin-left: 72%" class="filter-item" type="primary" icon="el-icon-search" @click="getList">
         查询
       </el-button>
     </div>
@@ -29,6 +26,8 @@
       highlight-current-row
       style="width:1136px"
     >
+      <!--<el-table-column type="selection" width="55" align="center">
+      </el-table-column>-->
       <el-table-column label="ID" prop="id" sortable="custom" align="center" width="80">
         <template slot-scope="scope">
           <span>{{ scope.row.id }}</span>
@@ -56,22 +55,23 @@
       </el-table-column>
       <el-table-column label="创建时间" width="160px" align="center">
         <template slot-scope="scope">
-          <span>{{scope.row.creationTime}}</span>
+          <span>{{scope.row.creationTime | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
         </template>
       </el-table-column>
-      <!--     自定义列-->
-      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
-        <template slot-scope="{row}">
-          <el-button type="primary" size="mini" @click="updateShow(row)">
-            修改
-          </el-button>
-          <el-button size="mini" type="danger" @click="handleDelete(row)">
-            删除
-          </el-button>
-        </template>
-      </el-table-column>
+
+    <!-- 分页工具条  自定义列-->
+    <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
+      <template slot-scope="{row}">
+        <el-button type="primary" size="mini" @click="updateShow(row)">
+          修改
+        </el-button>
+        <el-button size="mini" type="danger" @click="handleDelete(row)">
+          删除
+        </el-button>
+      </template>
+    </el-table-column>
     </el-table>
-    <!-- 分页工具条  page当前页 total总记录数 limit每页显示多少条 pagination触发自定义事件，查询数据-->
+    <!--page当前页 total总记录数 limit每页显示多少条 pagination触发自定义事件，查询数据&ndash;&gt;-->
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
     <!--  绑定了title，是一个数组里取的，表示是修改的标题还是添加的标题

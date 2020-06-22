@@ -1,17 +1,17 @@
 import request from '@/utils/request'
 
-export function newList(data) {
+export function conList(data) {
   return request({
-    url: 'new/newList',
+    url: 'con/conList',
     method: 'post',
     data
   })
 }
 
-export function newDel(id) {
+export function delList(id) {
   return request({
-    url: 'new/newDel',
-    method: 'get',
+    url: 'con/delCon',
+    method: 'post',
     params: { id }
   })
 }

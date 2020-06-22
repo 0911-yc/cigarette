@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface DatumService {
     public List<DatumEntity> datList();
+
+    public void delListById(Integer id);
 }
