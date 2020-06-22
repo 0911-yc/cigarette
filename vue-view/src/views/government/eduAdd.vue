@@ -28,7 +28,7 @@
         <el-button style="margin-left: 50%" class="filter-item" type="primary" icon="el-icon-search" @click="getList">
           查询
         </el-button>
-        <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+        <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-refresh" @click="handleCreate">
           重置
         </el-button>
       </div>

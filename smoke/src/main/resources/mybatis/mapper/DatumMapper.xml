@@ -12,6 +12,6 @@
     </resultMap>
 
     <select id="datList" resultMap="datMap">
-        select id,title,fileName,creator,creationTime from datum
+        select id,title,fileName,creator,creationTime from datum where `status`=1
     </select>
 </mapper>

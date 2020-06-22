@@ -14,12 +14,20 @@ import java.util.List;
 public class DatumController {
     @Autowired
     private DatumService datumService;
+
     @RequestMapping("datList")
     public ResponseResult datList(){
         List<DatumEntity> datList = datumService.datList();
         ResponseResult result=new ResponseResult();
         result.getData().put("items",datList);
         result.getData().put("total",datList.size());
+        return result;
+    }
+
+    @RequestMapping("delDat")
+    public ResponseResult delDat(Integer id){
+        datumService.delListById(id);
+        ResponseResult result=new ResponseResult();
         return result;
     }
 }

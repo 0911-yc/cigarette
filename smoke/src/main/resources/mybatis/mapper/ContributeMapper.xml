@@ -86,7 +86,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from contribute
     where id = #{id,jdbcType=INTEGER}
@@ -102,11 +102,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.xr.smoke.entity.Contribute">
-    insert into contribute (id, title, content, 
-      contributor, creationTime, creator, 
+    insert into contribute (id, title, content,
+      contributor, creationTime, creator,
       status)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{contributor,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, 
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+      #{contributor,jdbcType=VARCHAR}, #{creationtime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR},
       #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.xr.smoke.entity.Contribute">
@@ -240,4 +240,8 @@
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id,title,content,contributor,creationTime,creator,`status` FROM contribute where `status`=1
+  </select>
 </mapper>
