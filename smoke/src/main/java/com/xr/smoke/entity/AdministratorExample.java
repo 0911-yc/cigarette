@@ -3,7 +3,7 @@ package com.xr.smoke.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdministratorExample {
+public class  AdministratorExample {
     protected String orderByClause;
 
     protected boolean distinct;

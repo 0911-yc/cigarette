@@ -17,4 +17,9 @@ public class DatumServiceImpl implements DatumService {
         List<DatumEntity> datList = datumMapper.datList();
         return datList;
     }
+
+    @Override
+    public void delListById(Integer id) {
+        datumMapper.delListById(id);
+    }
 }

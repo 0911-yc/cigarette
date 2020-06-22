@@ -1,19 +1,20 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <span style="margin-left: 30%">标题</span>
+      <span>标题</span>
       <el-input v-model="listQuery.username" placeholder="请输资料集锦标题" style="width: 200px;" class="filter-item"/>
-      <br/>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-        添加
-      </el-button>
-
-      <el-button style="margin-left: 50%" class="filter-item" type="primary" icon="el-icon-search" @click="getList">
+      <el-button style="margin-left: 10%" class="filter-item" type="primary" icon="el-icon-search" @click="getList">
         查询
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-refresh" @click="handleCreate">
         重置
       </el-button>
+      <br/>
+      <div style="height: 4px">
+      </div>
+      <el-button  type="primary" icon="el-icon-plus" @click="handleCreate"></el-button>
+
+
     </div>
     <!--  数据表格-->
     <el-table
@@ -47,7 +48,7 @@
       </el-table-column>
       <el-table-column label="创建时间" width="180px" align="center">
         <template slot-scope="scope">
-          <span>{{scope.row.creationTime}}</span>
+          <span>{{scope.row.creationTime | parseTime('{y}-{m}-{d} {h}:{i}')}}</span>
         </template>
       </el-table-column>
       <!--     自定义列-->
@@ -137,7 +138,7 @@
   import waves from '@/directive/waves' // waves directive
   import { parseTime } from '@/utils'
   import Pagination from '@/components/Pagination' // 分页组件
-  import {datList} from "../../api/sys/datum";
+  import {datList,delDat} from "../../api/sys/datum";
 
   export default {
     name: 'userTable',
@@ -281,13 +282,13 @@
       },
       handleDelete(row) {
         // 先弹确认取消框
-        this.$confirm('确认删除【'+row.username+'】的信息吗?', '提示', {
+        this.$confirm('确认删除【'+row.title+'】的信息吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
           // 调用ajax去后台删除
-          deleteUser(row.id).then((response) => {
+          delDat(row.id).then((response) => {
             // 刷新数据表格
             this.getList()
             // ajax去后台删除
