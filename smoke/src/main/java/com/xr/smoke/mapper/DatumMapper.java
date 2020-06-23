@@ -1,30 +1,15 @@
 package com.xr.smoke.mapper;
 
-import com.xr.smoke.entity.Datum;
-import com.xr.smoke.entity.DatumExample;
+import com.xr.smoke.entity.DatumEntity;
+import org.apache.ibatis.annotations.Update;
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+@Repository
 public interface DatumMapper {
-    long countByExample(DatumExample example);
+    public List<DatumEntity> datList();
 
-    int deleteByExample(DatumExample example);
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(Datum record);
-
-    int insertSelective(Datum record);
-
-    List<Datum> selectByExample(DatumExample example);
-
-    Datum selectByPrimaryKey(Integer id);
-
-    int updateByExampleSelective(@Param("record") Datum record, @Param("example") DatumExample example);
-
-    int updateByExample(@Param("record") Datum record, @Param("example") DatumExample example);
-
-    int updateByPrimaryKeySelective(Datum record);
-
-    int updateByPrimaryKey(Datum record);
+    @Update("UPDATE datum SET `status`=0 where id=#{id}")
+    public void delListById(Integer id);
 }

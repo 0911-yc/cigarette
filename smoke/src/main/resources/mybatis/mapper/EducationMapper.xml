@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xr.smoke.mapper.EducationMapper">
+    <resultMap id="newMap" type="com.xr.smoke.entity.NewsEntity">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="time" jdbcType="DATE" property="time"/>
+        <result column="creationTime" jdbcType="DATE" property="creationTime"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+    </resultMap>
+
+    <select id="newList" resultMap="newMap">
+      select id,title,source,`type`,creator,creationTime from news where `status`=1
+    </select>
+
+</mapper>

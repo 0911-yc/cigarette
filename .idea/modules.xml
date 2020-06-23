@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/smoke/smoke.iml" filepath="$PROJECT_DIR$/smoke/smoke.iml" />
+      <module fileurl="file://$PROJECT_DIR$/smoke/base.iml" filepath="$PROJECT_DIR$/smoke/base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/cigarette.iml" filepath="$PROJECT_DIR$/.idea/cigarette.iml" />
     </modules>
   </component>
 </project>

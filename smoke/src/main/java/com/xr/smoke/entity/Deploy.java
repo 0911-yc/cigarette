@@ -1,68 +1,20 @@
 package com.xr.smoke.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
+@Data
 public class Deploy implements Serializable {
     private Integer id;
-
     private String title;
-
     private String content;
-
-    private Date creationtime;
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // 前台传过来的日期格式转换
+    @JsonFormat(pattern = "yyyy-MM-dd") // 后台传到前台的日期格式转换
+    private Date creationTime;
     private String creator;
-
     private Integer status;
-
-    private static final long serialVersionUID = 1L;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
-    public Date getCreationtime() {
-        return creationtime;
-    }
-
-    public void setCreationtime(Date creationtime) {
-        this.creationtime = creationtime;
-    }
-
-    public String getCreator() {
-        return creator;
-    }
-
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
 }
