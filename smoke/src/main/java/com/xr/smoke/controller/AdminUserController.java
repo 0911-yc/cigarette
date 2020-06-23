@@ -1,8 +1,10 @@
 package com.xr.smoke.controller;
 
 import com.xr.smoke.entity.Administrator;
+import com.xr.smoke.entity.Employee;
 import com.xr.smoke.entity.Institution;
 import com.xr.smoke.service.AdminUserService;
+import com.xr.smoke.service.EmployeeService;
 import com.xr.smoke.service.InstitutionService;
 import com.xr.smoke.util.ResponseResult;
 import org.apache.shiro.SecurityUtils;
@@ -22,6 +24,9 @@ import java.util.List;
 public class AdminUserController {
     @Autowired
     private AdminUserService adminUserService;
+
+    @Autowired
+    private EmployeeService employeeService;
 
     //部门
     @Autowired
@@ -79,14 +84,19 @@ public class AdminUserController {
     //部门
     @RequestMapping("list")
     @RequiresPermissions("user:list")
-    public ResponseResult list(Integer page,Integer limit){
-        List<Institution> list = institutionService.list();
+    public ResponseResult list(Institution institution,Integer page,Integer limit){
+        List<Institution> list = institutionService.list(institution);
         ResponseResult result = new ResponseResult();
-        result.getData().put("items",list);
+        List<Institution> list1 = institutionService.list1(institution.getDepartmenthead(), (page - 1) * limit, limit);
+        result.getData().put("items",list1);
         result.getData().put("total",list.size());
-        System.out.println(list.size());
+//        result.getData().put("page",list.size());
+//        result.getData().put("limit",list.size());
+//        System.out.println(list.size());
+//        System.out.println(page+"ps"+limit+"lm");
         return result;
     }
+
 
     @RequestMapping("add")
     @RequiresPermissions("user:add")
@@ -101,6 +111,7 @@ public class AdminUserController {
     @RequiresPermissions("user:update")
     public ResponseResult update(Institution institution){
         institutionService.update(institution);
+        System.out.println(institution.getId());
         ResponseResult result = new ResponseResult();
         result.getData().put("message","修改成功");
         return result;
@@ -108,11 +119,49 @@ public class AdminUserController {
 
     @RequestMapping("delete")
     @RequiresPermissions("user:delete")
-    public ResponseResult add(Integer id){
+    public ResponseResult delete(Integer id){
         institutionService.deleteById(id);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","删除成功");
         return result;
     }
 
+    //员工查询全部
+    @RequestMapping("listemp")
+    public ResponseResult listemp(Employee employee,Integer page,Integer limit){
+        List<Employee> list = employeeService.list(employee);
+        List<Employee> like = employeeService.like(employee.getEmployeename(), (page - 1) * limit, limit);
+        ResponseResult result = new ResponseResult();
+        result.getData().put("items",like);
+        result.getData().put("total",list.size());
+        System.out.println(list.size());
+        return result;
+    }
+
+    //员工添加
+    @RequestMapping("addemp")
+    public ResponseResult addemp(Employee employee){
+        String timestamp = new String(String.valueOf(System.currentTimeMillis()));
+        employee.setEmployeeid(timestamp);
+        employeeService.add(employee);
+        ResponseResult result = new ResponseResult();
+        result.getData().put("message","添加成功");
+        return result;
+    }
+    //员工删除
+    @RequestMapping("deleteemp")
+    public ResponseResult deleteemp(int id){
+        employeeService.deleteById(id);
+        ResponseResult result = new ResponseResult();
+        result.getData().put("message","删除成功");
+        return result;
+    }
+    //员工修改
+    @RequestMapping("updateemp")
+    public ResponseResult updateemp(Employee employee){
+        employeeService.update(employee);
+        ResponseResult result = new ResponseResult();
+        result.getData().put("message","修改成功");
+        return result;
+    }
 }

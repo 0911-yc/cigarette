@@ -85,23 +85,18 @@ service.interceptors.response.use(
       }
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
-      Message({
-        message: res.data.message || 'Error',
-        type: 'success',
-        duration: 3 * 1000
-      })
       return res
     }
   },
   error => {
-    console.log('err' + error) // for debug
-    Message({
-      message: error.message,
-      type: 'error',
-      duration: 3 * 1000
-    })
-    return Promise.reject(error)
-  }
+  console.log('err' + error) // for debug
+  Message({
+    message: error.message,
+    type: 'error',
+    duration: 3 * 1000
+  })
+  return Promise.reject(error)
+}
 )
 
 export default service

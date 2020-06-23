@@ -3,20 +3,20 @@
 <mapper namespace="com.xr.smoke.mapper.EmployeeMapper">
   <resultMap id="BaseResultMap" type="com.xr.smoke.entity.Employee">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="employeeId" jdbcType="INTEGER" property="employeeid" />
+    <result column="employeeId" jdbcType="VARCHAR" property="employeeid" />
     <result column="employeeName" jdbcType="VARCHAR" property="employeename" />
     <result column="employeeSex" jdbcType="VARCHAR" property="employeesex" />
-    <result column="employeeAge" jdbcType="INTEGER" property="employeeage" />
-    <result column="education" jdbcType="INTEGER" property="education" />
-    <result column="politicsStatus" jdbcType="INTEGER" property="politicsstatus" />
+    <result column="employeeAge" jdbcType="VARCHAR" property="employeeage" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="politicsStatus" jdbcType="VARCHAR" property="politicsstatus" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="departmentID" jdbcType="INTEGER" property="departmentid" />
     <result column="Account" jdbcType="VARCHAR" property="account" />
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="postId" jdbcType="INTEGER" property="postid" />
-    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="creationTime" jdbcType="TIMESTAMP" property="creationtime" />
     <result column="currentName" jdbcType="VARCHAR" property="currentname" />
-    <result column="employeeStatus" jdbcType="INTEGER" property="employeestatus" />
+    <result column="employeeStatus" jdbcType="VARCHAR" property="employeestatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,7 +78,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, employeeId, employeeName, employeeSex, employeeAge, education, politicsStatus, 
-    phone, departmentID, Account, password, postId, time, currentName, employeeStatus
+    phone, departmentID, Account, password, postId, creationTime, currentName, employeeStatus
   </sql>
   <select id="selectByExample" parameterType="com.xr.smoke.entity.EmployeeExample" resultMap="BaseResultMap">
     select
@@ -115,13 +115,13 @@
       employeeSex, employeeAge, education, 
       politicsStatus, phone, departmentID, 
       Account, password, postId, 
-      time, currentName, employeeStatus
+      creationTime, currentName, employeeStatus
       )
-    values (#{id,jdbcType=INTEGER}, #{employeeid,jdbcType=INTEGER}, #{employeename,jdbcType=VARCHAR}, 
-      #{employeesex,jdbcType=VARCHAR}, #{employeeage,jdbcType=INTEGER}, #{education,jdbcType=INTEGER}, 
-      #{politicsstatus,jdbcType=INTEGER}, #{phone,jdbcType=VARCHAR}, #{departmentid,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{employeeid,jdbcType=VARCHAR}, #{employeename,jdbcType=VARCHAR},
+      #{employeesex,jdbcType=VARCHAR}, #{employeeage,jdbcType=INTEGER}, #{education,jdbcType=VARCHAR},
+      #{politicsstatus,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{departmentid,jdbcType=INTEGER},
       #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{postid,jdbcType=INTEGER}, 
-      #{time,jdbcType=TIMESTAMP}, #{currentname,jdbcType=VARCHAR}, #{employeestatus,jdbcType=INTEGER}
+      #{creationtime,jdbcType=TIMESTAMP}, #{currentname,jdbcType=VARCHAR}, #{employeestatus,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.xr.smoke.entity.Employee">
@@ -163,8 +163,8 @@
       <if test="postid != null">
         postId,
       </if>
-      <if test="time != null">
-        time,
+      <if test="creationtime != null">
+        creationTime,
       </if>
       <if test="currentname != null">
         currentName,
@@ -178,7 +178,7 @@
         #{id,jdbcType=INTEGER},
       </if>
       <if test="employeeid != null">
-        #{employeeid,jdbcType=INTEGER},
+        #{employeeid,jdbcType=VARCHAR},
       </if>
       <if test="employeename != null">
         #{employeename,jdbcType=VARCHAR},
@@ -190,10 +190,10 @@
         #{employeeage,jdbcType=INTEGER},
       </if>
       <if test="education != null">
-        #{education,jdbcType=INTEGER},
+        #{education,jdbcType=VARCHAR},
       </if>
       <if test="politicsstatus != null">
-        #{politicsstatus,jdbcType=INTEGER},
+        #{politicsstatus,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         #{phone,jdbcType=VARCHAR},
@@ -210,14 +210,14 @@
       <if test="postid != null">
         #{postid,jdbcType=INTEGER},
       </if>
-      <if test="time != null">
-        #{time,jdbcType=TIMESTAMP},
+      <if test="creationtime != null">
+        #{creationtime,jdbcType=TIMESTAMP},
       </if>
       <if test="currentname != null">
         #{currentname,jdbcType=VARCHAR},
       </if>
       <if test="employeestatus != null">
-        #{employeestatus,jdbcType=INTEGER},
+        #{employeestatus,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -234,7 +234,7 @@
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.employeeid != null">
-        employeeId = #{record.employeeid,jdbcType=INTEGER},
+        employeeId = #{record.employeeid,jdbcType=VARCHAR},
       </if>
       <if test="record.employeename != null">
         employeeName = #{record.employeename,jdbcType=VARCHAR},
@@ -246,10 +246,10 @@
         employeeAge = #{record.employeeage,jdbcType=INTEGER},
       </if>
       <if test="record.education != null">
-        education = #{record.education,jdbcType=INTEGER},
+        education = #{record.education,jdbcType=VARCHAR},
       </if>
       <if test="record.politicsstatus != null">
-        politicsStatus = #{record.politicsstatus,jdbcType=INTEGER},
+        politicsStatus = #{record.politicsstatus,jdbcType=VARCHAR},
       </if>
       <if test="record.phone != null">
         phone = #{record.phone,jdbcType=VARCHAR},
@@ -266,14 +266,14 @@
       <if test="record.postid != null">
         postId = #{record.postid,jdbcType=INTEGER},
       </if>
-      <if test="record.time != null">
-        time = #{record.time,jdbcType=TIMESTAMP},
+      <if test="record.creationtime != null">
+        creationTime = #{record.creationtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.currentname != null">
         currentName = #{record.currentname,jdbcType=VARCHAR},
       </if>
       <if test="record.employeestatus != null">
-        employeeStatus = #{record.employeestatus,jdbcType=INTEGER},
+        employeeStatus = #{record.employeestatus,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -283,20 +283,20 @@
   <update id="updateByExample" parameterType="map">
     update employee
     set id = #{record.id,jdbcType=INTEGER},
-      employeeId = #{record.employeeid,jdbcType=INTEGER},
+      employeeId = #{record.employeeid,jdbcType=VARCHAR},
       employeeName = #{record.employeename,jdbcType=VARCHAR},
       employeeSex = #{record.employeesex,jdbcType=VARCHAR},
       employeeAge = #{record.employeeage,jdbcType=INTEGER},
-      education = #{record.education,jdbcType=INTEGER},
-      politicsStatus = #{record.politicsstatus,jdbcType=INTEGER},
+      education = #{record.education,jdbcType=VARCHAR},
+      politicsStatus = #{record.politicsstatus,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       departmentID = #{record.departmentid,jdbcType=INTEGER},
       Account = #{record.account,jdbcType=VARCHAR},
       password = #{record.password,jdbcType=VARCHAR},
       postId = #{record.postid,jdbcType=INTEGER},
-      time = #{record.time,jdbcType=TIMESTAMP},
+      creationTime = #{record.creationtime,jdbcType=TIMESTAMP},
       currentName = #{record.currentname,jdbcType=VARCHAR},
-      employeeStatus = #{record.employeestatus,jdbcType=INTEGER}
+      employeeStatus = #{record.employeestatus,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -305,7 +305,7 @@
     update employee
     <set>
       <if test="employeeid != null">
-        employeeId = #{employeeid,jdbcType=INTEGER},
+        employeeId = #{employeeid,jdbcType=VARCHAR},
       </if>
       <if test="employeename != null">
         employeeName = #{employeename,jdbcType=VARCHAR},
@@ -317,10 +317,10 @@
         employeeAge = #{employeeage,jdbcType=INTEGER},
       </if>
       <if test="education != null">
-        education = #{education,jdbcType=INTEGER},
+        education = #{education,jdbcType=VARCHAR},
       </if>
       <if test="politicsstatus != null">
-        politicsStatus = #{politicsstatus,jdbcType=INTEGER},
+        politicsStatus = #{politicsstatus,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
         phone = #{phone,jdbcType=VARCHAR},
@@ -337,34 +337,34 @@
       <if test="postid != null">
         postId = #{postid,jdbcType=INTEGER},
       </if>
-      <if test="time != null">
-        time = #{time,jdbcType=TIMESTAMP},
+      <if test="creationTime != null">
+        creationTime = #{creationtime,jdbcType=TIMESTAMP},
       </if>
       <if test="currentname != null">
         currentName = #{currentname,jdbcType=VARCHAR},
       </if>
       <if test="employeestatus != null">
-        employeeStatus = #{employeestatus,jdbcType=INTEGER},
+        employeeStatus = #{employeestatus,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.xr.smoke.entity.Employee">
     update employee
-    set employeeId = #{employeeid,jdbcType=INTEGER},
+    set employeeId = #{employeeid,jdbcType=VARCHAR},
       employeeName = #{employeename,jdbcType=VARCHAR},
       employeeSex = #{employeesex,jdbcType=VARCHAR},
       employeeAge = #{employeeage,jdbcType=INTEGER},
-      education = #{education,jdbcType=INTEGER},
-      politicsStatus = #{politicsstatus,jdbcType=INTEGER},
+      education = #{education,jdbcType=VARCHAR},
+      politicsStatus = #{politicsstatus,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       departmentID = #{departmentid,jdbcType=INTEGER},
       Account = #{account,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       postId = #{postid,jdbcType=INTEGER},
-      time = #{time,jdbcType=TIMESTAMP},
+      creationTime = #{creationTime,jdbcType=TIMESTAMP},
       currentName = #{currentname,jdbcType=VARCHAR},
-      employeeStatus = #{employeestatus,jdbcType=INTEGER}
+      employeeStatus = #{employeestatus,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
