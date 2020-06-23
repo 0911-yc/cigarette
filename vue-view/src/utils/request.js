@@ -7,7 +7,7 @@ import qs from 'qs' // 引入JSON转字符串工具
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
-   withCredentials: true, // send cookies when cross-domain requests
+  withCredentials: true, // send cookies when cross-domain requests
   timeout: 10000 // request timeout
 })
 
@@ -15,7 +15,7 @@ const service = axios.create({
 service.interceptors.request.use(
   config => {
     // do something before request is sent
-    console.debug("request请求的ajax拦截器-utils/request")
+    console.debug('request请求的ajax拦截器-utils/request')
     if (store.getters.token) {
       // let each request carry token
       // ['X-Token'] is a custom headers key
@@ -25,8 +25,8 @@ service.interceptors.request.use(
     console.debug('-----utils/request')
     console.debug(config.data)
     // 如果是post提交，将json数据转为字符串
-    if(config.method  === 'post'){
-      config.data = qs.stringify(config.data);
+    if (config.method === 'post') {
+      config.data = qs.stringify(config.data)
     }
     // 设置数据提交方式为字符串
     config.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -63,12 +63,12 @@ service.interceptors.response.use(
         type: 'error',
         duration: 3 * 1000
       })
-    // if (res.code !== 20000) {
-    //   Message({
-    //     message: res.data.message || 'Error',
-    //     type: 'error',
-    //     duration: 3 * 1000
-    //   }),
+      // if (res.code !== 20000) {
+      //   Message({
+      //     message: res.data.message || 'Error',
+      //     type: 'error',
+      //     duration: 3 * 1000
+      //   }),
 
       // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
@@ -85,11 +85,6 @@ service.interceptors.response.use(
       }
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
-      Message({
-        message: res.data.message || 'Error',
-        type: 'success',
-        duration: 3 * 1000
-      })
       return res
     }
   },

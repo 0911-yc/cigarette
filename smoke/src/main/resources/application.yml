@@ -5,7 +5,7 @@ spring:
   datasource:
     username: root
     password: Yc171013@
-    url: jdbc:mysql://139.224.192.190:3306/cigarette
+    url: jdbc:mysql://139.224.192.190:3306/cigarette?useUnicode=true&characterEncoding=utf-8&useJDBCCompliantTimezoneShift=true
     driver-class-name: com.mysql.jdbc.Driver
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml

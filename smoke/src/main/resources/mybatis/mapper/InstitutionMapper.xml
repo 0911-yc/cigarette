@@ -111,8 +111,8 @@
       creationTime, currentId, currentName, 
       departmentState)
     values (#{id,jdbcType=INTEGER}, #{departmentid,jdbcType=VARCHAR}, #{departmentname,jdbcType=VARCHAR}, 
-      #{departmenthead,jdbcType=VARCHAR}, #{divisionalmanagement,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR}, 
-      #{creationtime,jdbcType=TIMESTAMP}, #{currentid,jdbcType=INTEGER}, #{currentname,jdbcType=VARCHAR}, 
+      #{departmenthead,jdbcType=VARCHAR}, #{divisionalmanagement,jdbcType=VARCHAR}, #{leader,jdbcType=VARCHAR},
+      #{creationtime,jdbcType=TIMESTAMP}, #{currentid,jdbcType=INTEGER}, #{currentname,jdbcType=VARCHAR},
       #{departmentstate,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.xr.smoke.entity.Institution">
@@ -288,4 +288,26 @@
       departmentState = #{departmentstate,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <resultMap id="InstitutionMapper" type="com.xr.smoke.entity.Institution">
+    <result column="id" property="id"/>
+    <result column="departmentid" property="departmentid"/>
+    <result column="departmentname" property="departmentname"/>
+    <result column="departmenthead" property="departmenthead"/>
+    <result column="leader" property="leader"/>
+    <result column="creationtime" property="creationtime"/>
+    <result column="departmentstate" property="departmentstate"/>
+    <result column="currentname" property="currentname"/>
+    <result column="currentid" property="currentid"/>
+
+
+    <collection property="statelist" javaType="com.xr.smoke.entity.State">
+      <result column="id" property="id"/>
+      <result column="state" property="state"/>
+
+    </collection>
+  </resultMap>
+  <!--<select id="list" resultMap="InstitutionMapper">-->
+      <!--select i.id,departmentID,departmentName,departmentHead,divisionalManagement,leader,creationTime,currentId,currentName,departmentState,s.state from institution i,state s WHERE i.departmentState=s.id-->
+  <!--</select>-->
 </mapper>
