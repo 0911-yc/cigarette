@@ -75,23 +75,23 @@ export const asyncRoutes = [
     children: [
       {
         path: 'organization',
-        component: () => import('@/views/Myvue/organization'),
+        component: () => import('@/views/Kcsvue/organization'),
         name: 'Organization ',
         meta: {
           title: '机构管理'
         }
       },
       {
-        path: 'staff',
-        component: () => import('@/views/permission/staff'),
-        name: 'Staff',
+        path: 'employee',
+        component: () => import('@/views/Kcsvue/employee'),
+        name: 'employee',
         meta: {
           title: '员工管理'
         }
       },
       {
         path: 'post',
-        component: () => import('@/views/permission/post'),
+        component: () => import('@/views/Kcsvue/Post'),
         name: 'Post',
         meta: {
           title: '岗位管理'

@@ -3,11 +3,11 @@
 <mapper namespace="com.xr.smoke.mapper.PostMapper">
   <resultMap id="BaseResultMap" type="com.xr.smoke.entity.Post">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="postId" jdbcType="INTEGER" property="postid" />
+    <result column="postId" jdbcType="VARCHAR" property="postid" />
     <result column="postName" jdbcType="VARCHAR" property="postname" />
     <result column="time" jdbcType="TIMESTAMP" property="time" />
     <result column="creator" jdbcType="VARCHAR" property="creator" />
-    <result column="postStatus" jdbcType="INTEGER" property="poststatus" />
+    <result column="postStatus" jdbcType="VARCHAR" property="poststatus" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>

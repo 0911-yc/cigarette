@@ -19,7 +19,7 @@ public interface InstitutionService {
     public void deleteById(Integer id);
 
     /**
-     * 修改用户
+     * 修改
      * @param
      */
     public void update(Institution institution);
@@ -29,5 +29,8 @@ public interface InstitutionService {
      * @param
      * @return
      */
-    public List<Institution> list();
+    public List<Institution> list(Institution institution);
+
+    //模糊查询
+    public List<Institution> list1(String departmenthead,Integer page,Integer limit);
 }
