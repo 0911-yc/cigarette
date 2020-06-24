@@ -21,6 +21,7 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
 
     @Override
     public void add(Responsibility responsibility) {
+
         responsibilityMapper.add(responsibility);
     }
 
@@ -38,5 +39,11 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     public List<Responsibility> list(Responsibility responsibility) {
         List<Responsibility> list = responsibilityMapper.list(responsibility);
         return list;
+    }
+
+    @Override
+    public void xiugai(String accessories, Integer id) {
+
+        responsibilityMapper.xiugai(accessories,id);
     }
 }

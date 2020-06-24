@@ -31,3 +31,11 @@ export function list(data) {
     data
   })
 }
+
+export function FileUpload(data) {
+  return request({
+    url: '/resp/FileUpload',
+    method: 'post',
+    data
+  })
+}

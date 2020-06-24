@@ -17,17 +17,16 @@ public interface PoliticianTalkMapper {
             "</script>"})
     public List<PoliticianTalk> list1(@Param("talkType") String talkType, @Param("page") Integer page, @Param("limit") Integer limit);
 
-//    @Select("select * from politicianTalk")
     @Select("select p.id id,talkType,talkcreationTime,talkSite,s.status status from politicianTalk p,status s where p.status = s.id")
     public List<PoliticianTalk> list(PoliticianTalk politicianTalk);
 
-    @Insert("insert into politicianTalk(talkName,talkDempartment,talkPoliticsStatus,talkDuty,talkType,talkcreationTime,talkSite,talkPerson,talkOutline,talkContent,datacreationTime,creator,status) values (#{talkName},#{talkDempartment},#{talkPoliticsStatus},#{talkDuty},#{talkType},#{talkcreationTime},#{talkSite},#{talkPerson},#{talkOutline},#{talkContent},#{datacreationTime},#{creator},#{status})")
+    @Insert("insert into politicianTalk(talkName,talkDempartment,talkPoliticsStatus,talkDuty,talkType,talkcreationTime,talkSite,talkPerson,talkOutline,talkContent,datacreationTime,creator,status) values (#{talkName},#{talkDempartment},#{talkPoliticsStatus},#{talkDuty},#{talkType},NOW(),#{talkSite},#{talkPerson},#{talkOutline},#{talkContent},NOW(),#{creator},#{status})")
     public void add(PoliticianTalk politicianTalk);
 
     @Delete("delete from politicianTalk where id=#{id}")
     public void delete(int id);
 
-    @Update("update politicianTalk set talkName=#{talkName},talkDempartment=#{talkDempartment},talkPoliticsStatus=#{talkPoliticsStatus},talkDuty=#{talkDuty},talkType=#{talkType},talkcreationTime=#{talkcreationTime},talkSite=#{talkSite},talkPerson=#{talkPerson},talkOutline=#{talkOutline},talkContent=#{talkContent},datacreationTime=#{datacreationTime},creator=#{creator},status=#{status} where id=#{id}")
+    @Update("update politicianTalk set talkName=#{talkName},talkDempartment=#{talkDempartment},talkPoliticsStatus=#{talkPoliticsStatus},talkDuty=#{talkDuty},talkType=#{talkType},talkcreationTime=NOW(),talkSite=#{talkSite},talkPerson=#{talkPerson},talkOutline=#{talkOutline},talkContent=#{talkContent},datacreationTime=NOW(),creator=#{creator},status=#{status} where id=#{id}")
     public void update(PoliticianTalk politicianTalk);
 
     long countByExample(PoliticianTalkExample example);

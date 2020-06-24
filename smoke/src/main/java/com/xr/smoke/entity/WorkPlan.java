@@ -5,10 +5,13 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 public class WorkPlan implements Serializable {
+    private List<WorkPlan> deptList = new ArrayList<>();
     private Integer id;
     private String title;
     private String content;
@@ -16,5 +19,5 @@ public class WorkPlan implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss") // 后台传到前台的日期格式转换
     private Date creationTime;
     private String creator;
-    private Integer status;
+    private String status;
 }
