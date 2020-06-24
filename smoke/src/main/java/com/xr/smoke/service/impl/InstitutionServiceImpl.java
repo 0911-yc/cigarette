@@ -18,7 +18,7 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public void add(Institution institution) {
-        institutionMapper.insert(institution);
+        institutionMapper.add(institution);
     }
 
     @Override
@@ -29,13 +29,21 @@ public class InstitutionServiceImpl implements InstitutionService {
 
     @Override
     public void update(Institution institution) {
-        institutionMapper.updateByPrimaryKeySelective(institution);
+        institutionMapper.update(institution);
 
     }
 
     @Override
-    public List<Institution> list() {
-        return institutionMapper.list();
+    public List<Institution> list(Institution institution) {
+//        InstitutionExample example = new InstitutionExample();
+//        InstitutionExample.Criteria criteria = example.createCriteria();
+        List<Institution> list =  institutionMapper.list(institution);
+        return list;
+    }
+
+    @Override
+    public List<Institution> list1(String departmenthead, Integer page, Integer limit) {
+       return institutionMapper.list1(departmenthead,page,limit);
     }
 
 
