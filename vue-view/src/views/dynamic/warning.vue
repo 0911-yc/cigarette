@@ -131,7 +131,7 @@
         listLoading: true, // 是否使用动画
         listQuery: {
           page: 1, // 分页需要的当前页
-          limit: 2, // 分页需要的每页显示多少条
+          limit: 5, // 分页需要的每页显示多少条
           sex: 1,
           username: ''
         },

@@ -1,8 +1,8 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      来访人姓名<el-input v-model="listQuery.visitor" placeholder="请输入" style="width: 200px;" class="filter-item"/>
-      被反映人姓名<el-input v-model="listQuery.defendant" placeholder="请输入" style="width: 200px;" class="filter-item"/>
+      <span>来访人姓名</span><el-input v-model="listQuery.visitor" placeholder="请输入" style="width: 200px;" class="filter-item"/>
+      <span>被反映人姓名</span><el-input v-model="listQuery.defendant" placeholder="请输入" style="width: 200px;" class="filter-item"/>
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="getList">
         查询
       </el-button>

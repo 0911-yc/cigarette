@@ -14,11 +14,13 @@ import store from './store'
 import router from './router'
 
 import './icons' // icon
+import echarts from 'echarts'
 import './permission' // permission control
 import './utils/error-log' // error log
 // 引入富文本编辑器需要的文件
 import VueUE from './components/vue-ueditor-wrap'
 Vue.component('VueUE', VueUE)
+Vue.prototype.$echarts = echarts
 
 import * as filters from './filters' // global filters
 

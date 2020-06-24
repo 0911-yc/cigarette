@@ -53,6 +53,9 @@ public class SysProcessController {
 
     @RequestMapping("update")
     public ResponseResult update(SysProcess sysProcess){
+        //截取富文本框中自动添加的<p>标签
+        StringSubstring stringSubstring = new StringSubstring();
+        sysProcess.setContent(stringSubstring.substring(sysProcess.getContent()));
         sysProcessService.update(sysProcess);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","修改成功");

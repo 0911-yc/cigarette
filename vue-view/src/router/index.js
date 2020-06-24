@@ -299,6 +299,30 @@ export const asyncRoutes = [
     ]
   },
   {
+    path: '/evaluation',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'Evaluation',
+    meta: {
+      title: '风险评价',
+      icon: 'chart'
+    },
+    children: [
+      {
+        path: 'proportion',
+        component: () => import('@/views/evaluation/proportion'),
+        name: 'Proportion',
+        meta: { title: '风险占比分析', noCache: true }
+      },
+      {
+        path: 'growth',
+        component: () => import('@/views/evaluation/growth'),
+        name: 'Growth',
+        meta: { title: '增长态势分析', noCache: true }
+      }
+    ]
+  },
+  {
     path: '/report',
     component: Layout,
     redirect: 'noRedirect',

@@ -10,6 +10,8 @@ public class Post implements Serializable {
 
     private String postname;
 
+    private Integer did;
+
     private Date time;
 
     private String creator;
@@ -40,6 +42,14 @@ public class Post implements Serializable {
 
     public void setPostname(String postname) {
         this.postname = postname == null ? null : postname.trim();
+    }
+
+    public Integer getDid() {
+        return did;
+    }
+
+    public void setDid(Integer did) {
+        this.did = did;
     }
 
     public Date getTime() {

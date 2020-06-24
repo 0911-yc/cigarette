@@ -52,6 +52,9 @@ public class RiskPointwarningController {
 
     @RequestMapping("update")
     public ResponseResult update(RiskPointwarning riskPointwarning){
+        //截取富文本框中自动添加的<p>标签
+        StringSubstring stringSubstring = new StringSubstring();
+        riskPointwarning.setContent(stringSubstring.substring(riskPointwarning.getContent()));
         riskPointwarningService.update(riskPointwarning);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","修改成功");
