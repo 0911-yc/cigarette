@@ -1,8 +1,10 @@
 package com.xr.smoke.controller;
 
+import com.xr.smoke.entity.StatusEntity;
 import com.xr.smoke.entity.WorkPlan;
 import com.xr.smoke.service.WorkPlanService;
 import com.xr.smoke.util.ResponseResult;
+import com.xr.smoke.util.StringSubstring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,8 @@ public class WorkPlanController {
 
     @RequestMapping("add")
     public ResponseResult add(WorkPlan workPlan){
+        StringSubstring stringSubstring = new StringSubstring();
+        workPlan.setContent(stringSubstring.substring(workPlan.getContent()));
         //获取系统当前时间
         SimpleDateFormat sdf= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date time=null;
@@ -47,6 +51,8 @@ public class WorkPlanController {
 
     @RequestMapping("update")
     public ResponseResult update(WorkPlan workPlan){
+        StringSubstring stringSubstring = new StringSubstring();
+        workPlan.setContent(stringSubstring.substring(workPlan.getContent()));
         workPlanService.update(workPlan);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","修改成功");
@@ -58,6 +64,15 @@ public class WorkPlanController {
         workPlanService.delete(id);
         ResponseResult result = new ResponseResult();
         result.getData().put("message","删除成功");
+        return result;
+    }
+
+    @RequestMapping("groupDept")
+    public ResponseResult groupDept(StatusEntity statusEntity){
+        System.out.println(statusEntity);
+        List<StatusEntity> groupDept = workPlanService.groupDept(statusEntity);
+        ResponseResult result = new ResponseResult();
+        result.getData().put("deptList",groupDept);
         return result;
     }
 }

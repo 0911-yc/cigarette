@@ -18,35 +18,29 @@
       highlight-current-row
       style="width: 100%;"
     >
-<!--      <el-table-column label="序号" prop="id" sortable="custom" align="center" width="80">-->
-<!--        <template slot-scope="scope">-->
-<!--          <span>{{ scope.row.id }}</span>-->
-<!--        </template>-->
-<!--      </el-table-column>-->
+      <el-table-column v-if="show" label="序号" prop="id" sortable="custom" align="center" width="80">
+        <template slot-scope="scope">
+          <span>{{ scope.row.id }}</span>
+        </template>
+      </el-table-column>
 
-      <el-table-column label="责任监督编号" min-width="150px">
+      <el-table-column label="责任监督编号" min-width="100px">
         <template slot-scope="{row}">
           <span class="link-type">{{ row.supervisionid }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="责任监督标题" min-width="150px">
+      <el-table-column label="责任监督标题" min-width="100px">
         <template slot-scope="{row}">
           <span class="link-type">{{ row.supervisiontitle }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="责任监督类型" min-width="150px">
+      <el-table-column label="责任监督类型" min-width="100px">
         <template slot-scope="{row}">
           <span class="link-type">{{ row.supervisiontype }}</span>
         </template>
       </el-table-column>
-
-      <!--      <el-table-column label="内容" min-width="150px">-->
-      <!--        <template slot-scope="{row}">-->
-      <!--          <span class="link-type">{{ row.content }}</span>-->
-      <!--        </template>-->
-      <!--      </el-table-column>-->
 
       <el-table-column label="状态" min-width="150px">
         <template slot-scope="{row}">
@@ -78,24 +72,81 @@
       -->
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px"
                style="width: 80%; margin-left:50px;">
+        <el-form-item v-if="show" label="责任监督编号" prop="supervisionid">
+          <el-input readonly placeholder="" v-model="temp.supervisionid"></el-input>
+        </el-form-item>
+
+        <el-form-item label="谈话类型" prop="supervisiontype">
+          <el-select v-model="temp.supervisiontype" placeholder="请选择">
+            <el-option label="作风建设" value="作风建设"></el-option>
+            <el-option label="纪检再监督" value="纪检再监督"></el-option>
+            <el-option label="执行力检查" value="执行力检查"></el-option>
+          </el-select>
+        </el-form-item>
+
         <el-form-item label="责任监督标题" prop="title">
           <el-input placeholder="请输入标题" v-model="temp.supervisiontitle"></el-input>
         </el-form-item>
-        <el-form-item label="责任监督类型" prop="title">
-          <el-input placeholder="请输入类型" v-model="temp.supervisiontype"></el-input>
-        </el-form-item>
-<!--        <el-form-item label="责任监督标题" prop="title">-->
-<!--          <el-input placeholder="请输入标题" v-model="temp.supervisiontitle"></el-input>-->
-<!--        </el-form-item>-->
+
         <el-form-item label="内容" prop="content">
-          <!--          <el-input placeholder="请输入内容" v-model="temp.content"></el-input>-->
-          <VueUE v-model="temp.supervisioncontent" label-width="800px" ></VueUE>
+          <el-card style="height: 610px;">
+            <quill-editor v-model="temp.supervisioncontent" ref="myQuillEditor" style="height: 500px;" :options="editorOption">
+            </quill-editor>
+          </el-card>
         </el-form-item>
+
+        <el-form-item label="谈话对象单位" prop="talkDempartment">
+          <el-select v-model="temp.departmentid" placeholder="请选择">
+            <el-option label="综合部" :value="3"></el-option>
+            <el-option label="内管组" :value="4"></el-option>
+            <el-option label="金刚组" :value="5"></el-option>
+            <el-option label="上天部" :value="14"></el-option>
+            <el-option label="客服部" :value="15"></el-option>
+          </el-select>
+        </el-form-item>
+
         <el-form-item label="创建人" prop="title">
-          <el-input placeholder="请输入创建人" v-model="temp.creator"></el-input>
+          <el-input readonly placeholder="请输入创建人" v-model="temp.creator = this.$store.state.user.name"></el-input>
         </el-form-item>
-        <el-form-item label="状态" prop="title">
-          <el-input placeholder="请输入状态" v-model="temp.status"></el-input>
+
+        <el-form-item label="状态" prop="status">
+          <el-select v-model="temp.status" placeholder="请选择">
+            <el-option label="通知" value="通知"></el-option>
+            <el-option label="自查" value="自查"></el-option>
+            <el-option label="再检查" value="再检查"></el-option>
+            <el-option label="整改通知" value="整改通知"></el-option>
+            <el-option label="提整改报告" value="提整改报告"></el-option>
+            <el-option label="通报" value="通报"></el-option>
+            <el-option label="结束" value="结束"></el-option>
+          </el-select>
+        </el-form-item>
+
+<!--        <el-form-item label="文件上传">-->
+<!--&lt;!&ndash;          选择文件: <el-input v-model="temp.accessories" type="file" name="fileUpload" id="fileUp" @change="change($event)" ref="inputFile"></el-input>&ndash;&gt;-->
+<!--        <el-upload-->
+<!--          :action="action"-->
+<!--          :file-list="modeList"-->
+<!--          :http-request="modeUpload"-->
+<!--        >-->
+<!--          <el-button size="small" type="primary">上传</el-button>-->
+<!--        </el-upload>-->
+<!--&lt;!&ndash;        <el-button @click="upload">点击上传文件</el-button>&ndash;&gt;-->
+<!--        </el-form-item>-->
+        <el-form-item label="附件" prop="accessories">
+          <el-upload
+            v-model="temp.accessories"
+            action="/123"
+            :before-upload="beforeUpload"
+            class="upload-demo"
+            ref="upload"
+            :on-change="changeMe"
+            name="file"
+            multiple
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :file-list="fileList">
+            <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+          </el-upload>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -111,24 +162,33 @@
 </template>
 
 <script>
-  //
-  import {add, update, list, deleteUser} from '@/api/sys/resp'
+  import {quillEditor} from 'vue-quill-editor'
+  import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.snow.css'
+  import 'quill/dist/quill.bubble.css'
+  import {add, update, list, deleteUser, FileUpload} from '@/api/sys/resp'
   import waves from '@/directive/waves' // waves directive
   import {parseTime} from '@/utils'
   import Pagination from '@/components/Pagination' // 分页组件
   export default {
     name: 'userTable',
-    components: {Pagination},
+    components: {Pagination,quillEditor},
     directives: {waves},
     data() {
       return {
+        action: 'https://jsonplaceholder.typicode.com/posts/',
+        mode: {},
+        content: null,
+        editorOption: {},
+        readonly: true,
+        show: false,
         tableKey: 0,
         list: null, // 后台返回，给数据表格展示的数据
         total: 0, // 总记录数
         listLoading: true, // 是否使用动画
         listQuery: {
           page: 1, // 分页需要的当前页
-          limit: 2, // 分页需要的每页显示多少条
+          limit: 5, // 分页需要的每页显示多少条
           // sex: 1,
           supervisiontitle: ''
         },
@@ -136,9 +196,11 @@
         temp: { // 添加、修改时绑定的表单数据
           id: undefined,
           supervisionid: '',
-          supervisiontitle: '',
           supervisiontype: '',
+          supervisiontitle: '',
           supervisioncontent: '',
+          departmentid: '',
+          accessories: '',
           creationTime: '',
           creator: '',
           status: ''
@@ -148,7 +210,7 @@
         dialogStatus: '', // 表示表单是添加还是修改的
         rules: {
           // 校验规则
-          title: [{required: true, message: '标题必填', trigger: 'blur'}]
+          // title: [{required: true, message: '标题必填', trigger: 'blur'}]
         },
         downloadLoading: false
       }
@@ -160,6 +222,18 @@
       this.getGroupDept()
     },
     methods: {
+      beforeUpload(file){
+        // alert(11111)
+        this.files=file
+        this.fileName=file.name
+        console.log(this.files)
+        console.log(this.fileName)
+        return false;
+      },
+      modeUpload: function(item) {
+        // console.log(item.file);
+        this.mode = item.file
+      },
       // 获得分好组的部门信息
       getGroupDept() {
         groupDept().then((response) => {
@@ -181,9 +255,10 @@
         this.temp = {
           id: undefined,
           supervisionid: '',
-          supervisiontitle: '',
           supervisiontype: '',
+          supervisiontitle: '',
           supervisioncontent: '',
+          departmentid: '',
           creationTime: '',
           creator: '',
           status: ''
@@ -205,12 +280,30 @@
       },
       // 添加对话框里，点击确定，执行添加操作
       createData() {
-        // 表单校验
+        if(this.fileName==""){
+          this.$message({
+            type: 'info',
+            message: '请选择要上传的文件'
+          });
+          return false
+        }
+        console.log(this.files)
+        let fileFormData = new FormData();
+        fileFormData.append('file', this.files, this.fileName);//filename是键，file是值，就是要传的文件，test.zip是要传的文件名
+        let requestConfig = {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          },
+        }
+        //表单校验
         this.$refs['dataForm'].validate((valid) => {
+
           // 所有的校验都通过
           if (valid) {
             // 调用api里的sys里的user.js的ajax方法
             add(this.temp).then((response) => {
+              this.$http.post('http://localhost:8888/resp/FileUpload?id=0',fileFormData,requestConfig)
+
               // 关闭对话框
               this.dialogFormVisible = false
               // 刷新数据表格里的数据
@@ -225,7 +318,7 @@
             })
           }
         })
-      },
+       },
       // 显示修改对话框
       handleUpdate(row) {
         // 将row里面与temp里属性相同的值，进行copy

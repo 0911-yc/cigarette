@@ -12,8 +12,8 @@ public class Duty implements Serializable {
     private Integer id;
     private String title;
     private String content;
-    @DateTimeFormat(pattern = "yyyy-MM-dd") // 前台传过来的日期格式转换
-    @JsonFormat(pattern = "yyyy-MM-dd") // 后台传到前台的日期格式转换
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss") // 前台传过来的日期格式转换
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss") // 后台传到前台的日期格式转换
     private Date creationTime;
     private String creator;
     private Integer status;

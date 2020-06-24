@@ -1,5 +1,6 @@
 package com.xr.smoke.service.impl;
 
+import com.xr.smoke.entity.StatusEntity;
 import com.xr.smoke.entity.WorkPlan;
 import com.xr.smoke.mapper.WorkPlanMapper;
 import com.xr.smoke.service.WorkPlanService;
@@ -38,5 +39,11 @@ public class WorkPlanServiceImpl implements WorkPlanService {
     public List<WorkPlan> list(WorkPlan workPlan) {
         List<WorkPlan> list = workPlanMapper.list(workPlan);
         return list;
+    }
+
+    @Override
+    public List<StatusEntity> groupDept(StatusEntity statusEntity) {
+        List<StatusEntity> groupDept = workPlanMapper.groupDept(statusEntity);
+        return groupDept;
     }
 }

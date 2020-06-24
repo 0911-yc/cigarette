@@ -24,25 +24,31 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="标题" min-width="150px">
+      <el-table-column label="标题" min-width="100px">
         <template slot-scope="{row}">
           <span class="link-type">{{ row.title }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="创建者" min-width="150px">
+      <el-table-column label="创建者" min-width="100px">
         <template slot-scope="{row}">
           <span class="link-type">{{ row.creator }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="创建时间" width="150px" align="center">
+      <el-table-column label="创建时间" width="200px" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.creationTime | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
+          <span>{{ scope.row.creationTime | parseTime('{y}-{m}-{d} {h}:{m}:{s}') }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column label="状态" min-width="100px">
+        <template slot-scope="{row}">
+          <span class="link-type">{{ row.status }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="操作" align="center" width="200px" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             修改
@@ -59,7 +65,7 @@
     <!--  绑定了title，是一个数组里取的，表示是修改的标题还是添加的标题
       visible.sync 对话框是否显示
     -->
-    <el-dialog :title="title" :visible.sync="dialogFormVisible" style="width: 80%">
+    <el-dialog :title="title" :fullscreen="true" :visible.sync="dialogFormVisible" style="width: 80%">
       <!--
           rules:校验规则
           model:数据绑定
@@ -69,11 +75,23 @@
         <el-form-item label="标题" prop="title">
           <el-input placeholder="请输入标题" v-model="temp.title"></el-input>
         </el-form-item>
-        <!--        <el-form-item label="内容" prop="content">-->
-        <!--          <el-input placeholder="请输入内容" v-model="temp.content"></el-input>-->
-        <!--        </el-form-item>-->
+        <el-form-item label="内容" prop="content">
+<!--          <el-input placeholder="请输入内容" v-model="temp.content"></el-input>-->
+          <el-card style="height: 610px;">
+            <quill-editor v-model="temp.content" ref="myQuillEditor" style="height: 500px;" :options="editorOption">
+            </quill-editor>
+          </el-card>
+        </el-form-item>
         <el-form-item label="创建者" prop="creator">
-          <el-input placeholder="请输入创建者" v-model="temp.creator"></el-input>
+          <el-input readonly placeholder="请输入创建者" v-model="temp.creator = this.$store.state.user.name"></el-input>
+        </el-form-item>
+        <el-form-item label="状态" prop="status">
+          <el-select v-model="temp.status" placeholder="请选择">
+            <!--                <el-option v-for="item in deptList" :key="item.id" :label="item.status" :value="item.id"></el-option>-->
+            <el-option label="创建" :value="1"></el-option>
+            <el-option label="待审" :value="2"></el-option>
+            <el-option label="已审核" :value="3"></el-option>
+          </el-select>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -89,24 +107,30 @@
 </template>
 
 <script>
-  //
+  import {quillEditor} from 'vue-quill-editor'
+  import 'quill/dist/quill.core.css'
+  import 'quill/dist/quill.snow.css'
+  import 'quill/dist/quill.bubble.css'
   import {add, update, list, deleteUser} from '@/api/sys/deploy'
   import waves from '@/directive/waves' // waves directive
   import {parseTime} from '@/utils'
   import Pagination from '@/components/Pagination' // 分页组件
   export default {
     name: 'userTable',
-    components: {Pagination},
+    components: {Pagination,quillEditor},
     directives: {waves},
     data() {
       return {
+        readonly: true,
+        content: null,
+        editorOption: {},
         tableKey: 0,
         list: null, // 后台返回，给数据表格展示的数据
         total: 0, // 总记录数
         listLoading: true, // 是否使用动画
         listQuery: {
           page: 1, // 分页需要的当前页
-          limit: 2, // 分页需要的每页显示多少条
+          limit: 5, // 分页需要的每页显示多少条
           // sex: 1,
           title: ''
         },
@@ -114,7 +138,10 @@
         temp: { // 添加、修改时绑定的表单数据
           id: undefined,
           title: '',
+          content: '',
           creator: '',
+          creationTime: '',
+          status: ''
         },
         title: '添加', // 对话框显示的提示 根据dialogStatus create
         dialogFormVisible: false, // 是否显示对话框
@@ -154,7 +181,10 @@
         this.temp = {
           id: undefined,
           title: '',
+          content: '',
           creator: '',
+          creationTime: '',
+          status: ''
         }
       },
       // 显示添加的对话框

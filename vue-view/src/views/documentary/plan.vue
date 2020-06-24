@@ -25,19 +25,19 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="标题" min-width="150px">
+      <el-table-column label="标题" min-width="100px">
         <template slot-scope="{row}">
           <span class="link-type">{{ row.title }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="内容" min-width="150px">
+      <el-table-column label="内容" min-width="100px">
         <template slot-scope="{row}">
           <span class="link-type">{{ row.content }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="创建者" min-width="150px">
+      <el-table-column label="创建者" min-width="100px">
         <template slot-scope="{row}">
           <span class="link-type">{{ row.creator }}</span>
         </template>
@@ -49,7 +49,13 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column label="状态" min-width="50px">
+        <template slot-scope="{row}">
+          <span class="link-type">{{ row.status }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="操作" align="center" width="200px" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             修改
@@ -87,6 +93,18 @@
         <el-form-item label="创建者" prop="creator">
           <el-input readonly placeholder="请输入创建者" v-model="temp.creator = this.$store.state.user.name"></el-input>
         </el-form-item>
+        <el-form-item label="状态" prop="status">
+          <el-select v-model="temp.statuse" placeholder="请选择">
+                <el-option
+                  v-for="item in deptList"
+                           :key="item.id"
+                           :label="item.status"
+                           :value="item.id"></el-option>
+<!--            <el-option label="创建" :value="1"></el-option>-->
+<!--            <el-option label="待审" :value="2"></el-option>-->
+<!--            <el-option label="已审核" :value="3"></el-option>-->
+          </el-select>
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">
@@ -101,12 +119,11 @@
 </template>
 
 <script>
-  //
   import {quillEditor} from 'vue-quill-editor'
   import 'quill/dist/quill.core.css'
   import 'quill/dist/quill.snow.css'
   import 'quill/dist/quill.bubble.css'
-  import {add, update, list, deleteUser} from '@/api/sys/workplan'
+  import {add, update, list, deleteUser, groupDept} from '@/api/sys/workplan'
   import waves from '@/directive/waves' // waves directive
   import {parseTime} from '@/utils'
   import Pagination from '@/components/Pagination' // 分页组件
@@ -117,6 +134,7 @@
     directives: {waves},
     data() {
       return {
+        status: 1,
         readonly: true,
         content: null,
         editorOption: {},
@@ -126,8 +144,7 @@
         listLoading: true, // 是否使用动画
         listQuery: {
           page: 1, // 分页需要的当前页
-          limit: 2, // 分页需要的每页显示多少条
-          // sex: 1,
+          limit: 5, // 分页需要的每页显示多少条
           title: ''
         },
         deptList: [], // 后台查询出来，分好组的部门信息
@@ -136,7 +153,8 @@
           title: '',
           content: '',
           creator: '',
-          creationTime: ''
+          creationTime: '',
+          statuse: ''
         },
         title: '添加', // 对话框显示的提示 根据dialogStatus create
         dialogFormVisible: false, // 是否显示对话框
@@ -161,6 +179,7 @@
     getGroupDept()
     {
       groupDept().then((response) => {
+        console.log(response.data.deptList)
         this.deptList = response.data.deptList
       })
     }
@@ -185,7 +204,8 @@
         title: '',
         content: '',
         creator: '',
-        creationTime: ''
+        creationTime: '',
+        status: ''
       }
     }
   ,
@@ -255,7 +275,9 @@
         // 表单校验通过
         if (valid) {
           // 将temp拷贝到tempData
+         console.log(this.temp)
           const tempData = Object.assign({}, this.temp)
+          console.log(tempData)
           // 进行ajax提交
           update(tempData).then((response) => {
             // 提交完毕，关闭对话框

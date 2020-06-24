@@ -11,4 +11,5 @@ public interface ResponsibilityService {
     public void delete(int id);
     public void update(Responsibility responsibility);
     public List<Responsibility> list(Responsibility responsibility);
+    public void xiugai(String accessories, Integer id);
 }

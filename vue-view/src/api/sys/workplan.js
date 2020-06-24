@@ -35,3 +35,11 @@ export function list(data) {
   })
 }
 
+export function groupDept(data) {
+  return request({
+    url: '/role/groupDept',
+    method: 'post',
+    data
+  })
+}
+

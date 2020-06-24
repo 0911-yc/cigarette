@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DeployMapper {
-    @Select({"<script>select * from deploy where 1=1 " ,
+    @Select({"<script>select d.id id,title,content,creationTime,creator,s.`status` status from deploy d,`status` s where d.status=s.id and 1=1 " ,
             "<when test='!title.equals(\"\")'>",
             " and title like '%${title}%'",
             "</when>",
@@ -17,7 +17,7 @@ public interface DeployMapper {
             "</script>"})
     public List<Deploy> list1(@Param("title") String title, @Param("page") Integer page, @Param("limit") Integer limit);
 
-    @Select("select * from deploy")
+    @Select("select d.id id,title,content,creationTime,creator,s.`status` status from deploy d,`status` s where d.status=s.id")
     public List<Deploy> list(Deploy deploy);
 
     @Insert("insert into deploy(title,content,creationTime,creator,status) values (#{title},#{content},NOW(),#{creator},#{status})")

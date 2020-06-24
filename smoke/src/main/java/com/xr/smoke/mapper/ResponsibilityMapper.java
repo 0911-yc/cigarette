@@ -1,7 +1,6 @@
 package com.xr.smoke.mapper;
 
 import com.xr.smoke.entity.Responsibility;
-import com.xr.smoke.entity.WorkPlan;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -28,4 +27,10 @@ public interface ResponsibilityMapper {
 
     @Update("update responsibility set supervisionid=#{supervisionid},supervisiontype=#{supervisiontype},supervisiontitle=#{supervisiontitle},supervisioncontent=#{supervisioncontent},departmentid=#{departmentid},accessories=#{accessories},creationTime=NOW(),creator=#{creator},status=#{status} where id=#{id}")
     public void update(Responsibility responsibility);
+
+    @Update("update responsibility set accessories=#{accessories} where id=#{id}")
+    public void xiugai(String accessories, Integer id);
+
+    @Select("select  from responsibility")
+    public List<Responsibility> max(Responsibility responsibility);
 }
