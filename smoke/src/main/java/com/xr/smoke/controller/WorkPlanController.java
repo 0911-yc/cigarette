@@ -69,8 +69,8 @@ public class WorkPlanController {
 
     @RequestMapping("groupDept")
     public ResponseResult groupDept(StatusEntity statusEntity){
-        System.out.println(statusEntity);
         List<StatusEntity> groupDept = workPlanService.groupDept(statusEntity);
+        System.out.println(groupDept);
         ResponseResult result = new ResponseResult();
         result.getData().put("deptList",groupDept);
         return result;

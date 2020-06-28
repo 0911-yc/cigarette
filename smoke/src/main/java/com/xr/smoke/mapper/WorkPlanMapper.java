@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WorkPlanMapper {
-    @Select({"<script>select w.id id,title,content,creationTime,creator,s.`status` status from workPlan w,`status` s where w.`status`=s.id and 1=1 " ,
+    @Select({"<script>select w.id id,title,content,creationTime,creator,s.status statuse from workPlan w,status s where w.statuse =s.id and 1=1 " ,
             "<when test='!title.equals(\"\")'>",
             " and title like '%${title}%' ",
             "</when>",
@@ -18,16 +18,16 @@ public interface WorkPlanMapper {
             "</script>"})
     public List<WorkPlan> list1(@Param("title") String title, @Param("page") Integer page, @Param("limit") Integer limit);
 
-    @Select("select w.id id,title,content,creationTime,creator,s.`status` status from workPlan w,`status` s where w.`status`=s.id")
+    @Select("select w.id id,title,content,creationTime,creator,s.status statuse from workPlan w,status s where w.statuse=s.id")
     public List<WorkPlan> list(WorkPlan workPlan);
 
-    @Insert("insert into workPlan(title,content,creationTime,creator,status) values (#{title},#{content},NOW(),#{creator},#{status})")
+    @Insert("insert into workPlan(title,content,creationTime,creator,statuse) values (#{title},#{content},NOW(),#{creator},#{statuse})")
     public void add(WorkPlan workPlan);
 
     @Delete("delete from workPlan where id=#{id}")
     public void delete(int id);
 
-    @Update("update workPlan set title=#{title},content=#{content},creationTime=NOW(),creator=#{creator},status=#{status} where id=#{id}")
+    @Update("update workPlan set title=#{title},content=#{content},creationTime=NOW(),creator=#{creator},statuse=#{statuse} where id=#{id}")
     public void update(WorkPlan workPlan);
 
     @Select("select id,status from status")
