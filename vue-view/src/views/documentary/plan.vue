@@ -51,7 +51,7 @@
 
       <el-table-column label="状态" min-width="50px">
         <template slot-scope="{row}">
-          <span class="link-type">{{ row.status }}</span>
+          <span class="link-type">{{ row.statuse }}</span>
         </template>
       </el-table-column>
 
@@ -205,7 +205,7 @@
         content: '',
         creator: '',
         creationTime: '',
-        status: ''
+        statuse: ''
       }
     }
   ,

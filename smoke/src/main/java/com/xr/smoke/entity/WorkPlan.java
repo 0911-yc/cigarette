@@ -19,5 +19,5 @@ public class WorkPlan implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss") // 后台传到前台的日期格式转换
     private Date creationTime;
     private String creator;
-    private String status;
+    private String statuse;
 }
