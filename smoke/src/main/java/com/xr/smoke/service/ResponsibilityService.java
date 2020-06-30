@@ -12,4 +12,5 @@ public interface ResponsibilityService {
     public void update(Responsibility responsibility);
     public List<Responsibility> list(Responsibility responsibility);
     public void xiugai(String accessories, Integer id);
+    public Responsibility max();
 }

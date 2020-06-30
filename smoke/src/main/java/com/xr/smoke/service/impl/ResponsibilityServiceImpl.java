@@ -46,4 +46,9 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
 
         responsibilityMapper.xiugai(accessories,id);
     }
+
+    @Override
+    public Responsibility max() {
+        return responsibilityMapper.max();
+    }
 }

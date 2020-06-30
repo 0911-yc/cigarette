@@ -21,7 +21,8 @@ import './utils/error-log' // error log
 import VueUE from './components/vue-ueditor-wrap'
 Vue.component('VueUE', VueUE)
 Vue.prototype.$echarts = echarts
-
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
 import * as filters from './filters' // global filters
 
 /**

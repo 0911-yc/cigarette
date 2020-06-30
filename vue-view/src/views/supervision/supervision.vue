@@ -5,8 +5,13 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="getList">
         查询
       </el-button>
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
+      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit"
+                 @click="handleCreate">
         添加
+      </el-button>
+      <el-button v-waves :loading="downloadLoading" class="filter-item" type="primary" icon="el-icon-download"
+                 @click="handleDownload">
+        导出
       </el-button>
     </div>
     <el-table
@@ -42,13 +47,13 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="状态" min-width="150px">
+      <el-table-column label="状态" min-width="100px">
         <template slot-scope="{row}">
           <span class="link-type">{{ row.status }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="350px" class-name="small-padding fixed-width">
         <template slot-scope="{row}">
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
             修改
@@ -56,11 +61,19 @@
           <el-button size="mini" type="danger" @click="handleDelete(row)">
             删除
           </el-button>
+          <!--          <el-button size="mini" @click="tz">-->
+          <!--            发布通知-->
+          <!--          </el-button>-->
+          <!--          <el-button size="mini" @click="fk" v-if="noshow">-->
+          <!--&lt;!&ndash;          :style="{ display: visifk }" &ndash;&gt;-->
+          <!--            查看反馈-->
+          <!--          </el-button>-->
         </template>
       </el-table-column>
     </el-table>
     <!-- 分页工具条  page当前页 total总记录数 limit每页显示多少条 pagination触发自定义事件，查询数据-->
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList"/>
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit"
+                @pagination="getList"/>
 
     <!--  绑定了title，是一个数组里取的，表示是修改的标题还是添加的标题
       visible.sync 对话框是否显示
@@ -90,7 +103,8 @@
 
         <el-form-item label="内容" prop="content">
           <el-card style="height: 610px;">
-            <quill-editor v-model="temp.supervisioncontent" ref="myQuillEditor" style="height: 500px;" :options="editorOption">
+            <quill-editor v-model="temp.supervisioncontent" ref="myQuillEditor" style="height: 500px;"
+                          :options="editorOption">
             </quill-editor>
           </el-card>
         </el-form-item>
@@ -120,18 +134,6 @@
             <el-option label="结束" value="结束"></el-option>
           </el-select>
         </el-form-item>
-
-<!--        <el-form-item label="文件上传">-->
-<!--&lt;!&ndash;          选择文件: <el-input v-model="temp.accessories" type="file" name="fileUpload" id="fileUp" @change="change($event)" ref="inputFile"></el-input>&ndash;&gt;-->
-<!--        <el-upload-->
-<!--          :action="action"-->
-<!--          :file-list="modeList"-->
-<!--          :http-request="modeUpload"-->
-<!--        >-->
-<!--          <el-button size="small" type="primary">上传</el-button>-->
-<!--        </el-upload>-->
-<!--&lt;!&ndash;        <el-button @click="upload">点击上传文件</el-button>&ndash;&gt;-->
-<!--        </el-form-item>-->
         <el-form-item label="附件" prop="accessories">
           <el-upload
             v-model="temp.accessories"
@@ -162,6 +164,8 @@
 </template>
 
 <script>
+  import FileSaver from 'file-saver'
+  import XLSX from 'xlsx'
   import {quillEditor} from 'vue-quill-editor'
   import 'quill/dist/quill.core.css'
   import 'quill/dist/quill.snow.css'
@@ -172,10 +176,11 @@
   import Pagination from '@/components/Pagination' // 分页组件
   export default {
     name: 'userTable',
-    components: {Pagination,quillEditor},
+    components: {Pagination, quillEditor},
     directives: {waves},
     data() {
       return {
+        // fileList: this.name,
         action: 'https://jsonplaceholder.typicode.com/posts/',
         mode: {},
         content: null,
@@ -183,12 +188,13 @@
         readonly: true,
         show: false,
         tableKey: 0,
+        visifk: 'none',
         list: null, // 后台返回，给数据表格展示的数据
         total: 0, // 总记录数
         listLoading: true, // 是否使用动画
         listQuery: {
           page: 1, // 分页需要的当前页
-          limit: 5, // 分页需要的每页显示多少条
+          limit: 3, // 分页需要的每页显示多少条
           // sex: 1,
           supervisiontitle: ''
         },
@@ -222,15 +228,38 @@
       this.getGroupDept()
     },
     methods: {
-      beforeUpload(file){
+      handleDownload() {
+        this.downloadLoading = true
+        import('@/vendor/Export2Excel').then(excel => {
+          const tHeader = ['supervisionid', 'supervisiontype', 'supervisiontitle', 'supervisioncontent', 'departmentid', 'accessories', 'creationTime', 'creator', 'status']
+          const filterVal = ['supervisionid', 'supervisiontype', 'supervisiontitle', 'supervisioncontent', 'departmentid', 'accessories', 'creationTime', 'creator', 'status']
+          const data = this.formatJson(filterVal, this.list)
+          excel.export_json_to_excel({
+            header: tHeader,
+            data,
+            filename: 'table-list'
+          })
+          this.downloadLoading = false
+        })
+      },
+      formatJson(filterVal, jsonData) {
+        return jsonData.map(v => filterVal.map(j => {
+          if (j === 'timestamp') {
+            return parseTime(v[j])
+          } else {
+            return v[j]
+          }
+        }))
+      },
+      beforeUpload(file) {
         // alert(11111)
-        this.files=file
-        this.fileName=file.name
+        this.files = file
+        this.fileName = file.name
         console.log(this.files)
         console.log(this.fileName)
         return false;
       },
-      modeUpload: function(item) {
+      modeUpload: function (item) {
         // console.log(item.file);
         this.mode = item.file
       },
@@ -280,7 +309,7 @@
       },
       // 添加对话框里，点击确定，执行添加操作
       createData() {
-        if(this.fileName==""){
+        if (this.fileName == "") {
           this.$message({
             type: 'info',
             message: '请选择要上传的文件'
@@ -302,8 +331,8 @@
           if (valid) {
             // 调用api里的sys里的user.js的ajax方法
             add(this.temp).then((response) => {
-              this.$http.post('http://localhost:8888/resp/FileUpload?id=0',fileFormData,requestConfig)
-
+              console.log(response.data.id)
+              this.$http.post('http://localhost:8888/resp/FileUpload?id=' + response.data.id, fileFormData, requestConfig)
               // 关闭对话框
               this.dialogFormVisible = false
               // 刷新数据表格里的数据
@@ -318,7 +347,7 @@
             })
           }
         })
-       },
+      },
       // 显示修改对话框
       handleUpdate(row) {
         // 将row里面与temp里属性相同的值，进行copy
@@ -339,8 +368,38 @@
         this.$refs['dataForm'].validate((valid) => {
           // 表单校验通过
           if (valid) {
-            // 将temp拷贝到tempData
+
+            if (this.fileName == "") {
+              this.$message({
+                type: 'info',
+                message: '请选择要上传的文件'
+              });
+              return false
+            }
+            console.log(this.files)
+            let fileFormData = new FormData();
+            fileFormData.append('file', this.files, this.fileName);//filename是键，file是值，就是要传的文件，test.zip是要传的文件名
+            let requestConfig = {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              },
+            }
+
             const tempData = Object.assign({}, this.temp)
+
+            this.$http.post('http://localhost:8888/resp/FileUpload?id=' + tempData.id, fileFormData, requestConfig).then(rep => {
+              // 提交完毕，关闭对话框
+              this.dialogFormVisible = false
+              // 刷新数据表格
+              this.getList()
+              // 显示通知
+              this.$notify({
+                title: '成功',
+                message: response.data.message,
+                type: 'success',
+                duration: 2000
+              })
+            })
             // 进行ajax提交
             update(tempData).then((response) => {
               // 提交完毕，关闭对话框
@@ -381,9 +440,8 @@
           this.$message({
             type: 'info',
             message: '已取消删除'
-          });
-        });
-
+          })
+        })
       }
     }
   }

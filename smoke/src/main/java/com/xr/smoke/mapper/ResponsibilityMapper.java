@@ -29,8 +29,8 @@ public interface ResponsibilityMapper {
     public void update(Responsibility responsibility);
 
     @Update("update responsibility set accessories=#{accessories} where id=#{id}")
-    public void xiugai(String accessories, Integer id);
+    public void xiugai(@Param("accessories") String accessories,@Param("id") Integer id);
 
-    @Select("select  from responsibility")
-    public List<Responsibility> max(Responsibility responsibility);
+    @Select("select max(id) id from responsibility")
+    public Responsibility max();
 }

@@ -26,6 +26,7 @@ public class ResponsibilityController {
     public String FileUpload(@RequestParam("file") MultipartFile file, @RequestParam("id") Integer id) {
         System.out.println("文件上传" + file);
         fileupload(file);
+        System.out.println(file.getOriginalFilename()+"JJJ");
         responsibilityService.xiugai(file.getOriginalFilename(), id);
         return "";
     }
@@ -102,7 +103,9 @@ public class ResponsibilityController {
         responsibility.setSupervisionid(timestamp);
         responsibility.setCreationTime(time);
         responsibilityService.add(responsibility);
+        Responsibility max = responsibilityService.max();
         ResponseResult result = new ResponseResult();
+        result.getData().put("id",max.getId());
         result.getData().put("message", "添加成功");
         return result;
     }
