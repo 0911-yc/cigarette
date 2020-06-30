@@ -34,7 +34,7 @@ public class PostRisk implements Serializable {
     private Integer creator;
 
     private String cname;
-    private Integer state;
+    private Integer status;
 
     private static final long serialVersionUID = 1L;
 

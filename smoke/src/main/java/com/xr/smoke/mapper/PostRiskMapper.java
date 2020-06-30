@@ -57,5 +57,18 @@ public interface PostRiskMapper {
             "</script>"})
     List<Map<String, Object>> getselCondition(@Param("did") Integer did, @Param("pid") Integer pid);
 
-
+    @Select({"<script>",
+            "SELECT risk_value riskValue,grade FROM postRisk WHERE 1=1 ",
+            "<when test='postRisk.year!=null'>",
+            "and year regexp '${postRisk.year}'",
+            "</when>",
+            "<when test='postRisk.did!=null'>",
+            "and did = '${postRisk.did}'",
+            "</when>",
+            "<when test='postRisk.grade!=null'>",
+            "and grade = '${postRisk.grade}'",
+            "</when>",
+            "and status=1",
+            "</script>"})
+    List<PostRisk> Postselect(@Param("postRisk") PostRisk postRisk);
 }

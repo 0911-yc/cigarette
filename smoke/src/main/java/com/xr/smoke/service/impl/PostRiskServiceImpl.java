@@ -2,6 +2,7 @@ package com.xr.smoke.service.impl;
 
 import com.xr.smoke.entity.Institution;
 import com.xr.smoke.entity.Post;
+import com.xr.smoke.entity.PostRisk;
 import com.xr.smoke.mapper.PostRiskMapper;
 import com.xr.smoke.service.PostRiskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,10 @@ public class PostRiskServiceImpl implements PostRiskService {
     @Override
     public List<Map<String, Object>> getselCondition(Integer did, Integer pid) {
         return postRiskMapper.getselCondition(did,pid);
+    }
+
+    @Override
+    public List<PostRisk> Postselect(PostRisk postRisk) {
+        return postRiskMapper.Postselect(postRisk);
     }
 }

@@ -9,6 +9,9 @@
       <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
         添加
       </el-button>
+      <el-button class="filter-item" type="primary" icon="el-icon-refresh" @click="getReset"><!--@click="getReset"-->
+        重置
+      </el-button>
     </div>
     <!--  数据表格-->
     <el-table
@@ -87,7 +90,7 @@
     <!--  绑定了title，是一个数组里取的，表示是修改的标题还是添加的标题
       visible.sync 对话框是否显示
     -->
-    <el-dialog :fullscreen="true" :title="title" :visible.sync="dialogFormVisible" style="width: 100%">
+    <el-dialog  :title="title" :visible.sync="dialogFormVisible" width="800px">
       <!--
           rules:校验规则
           model:数据绑定
@@ -215,6 +218,12 @@
           // 转圈圈结束
           this.listLoading = false
         })
+      },
+      //重置文本框数据
+      getReset(){
+        this.listQuery.visitor=''
+        this.listQuery.defendant=''
+        this.getList();
       },
       // 重置表单数据
       resetTemp() {

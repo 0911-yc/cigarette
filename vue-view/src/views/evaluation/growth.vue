@@ -22,6 +22,9 @@
       <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="getListCondition"><!--@click="getList"-->
         查询
       </el-button>
+      <el-button v-waves class="filter-item" type="primary" icon="el-icon-refresh" @click="getReset"><!--@click="getReset"-->
+        重置
+      </el-button>
 
       <div id="echartsId" :style="{width:'100%',height: '550px'}"></div>
     </div>
@@ -45,7 +48,7 @@
           pid: '',
           did: ''
         },
-        getdate:['2018','2019','2021'],
+        getdate:['2018','2019','2020'],
         getsel:[],
         Three_num:[0,2,1],
         primary_num:[11, 11, 1],
@@ -195,11 +198,16 @@
       })
     },
     methods:{
-      dept(){
-        this.listQuery.pid=''
+      dept(val=0){
+        this.listQuery.pid= ''
         postOptions(this.listQuery.did).then(rep=>{
           this.postOptions=rep.data.items
         })
+      },
+      getReset(){
+        this.listQuery.did=''
+        this.listQuery.pid=''
+        this.getsel();
       },
       getListCondition(){
         getselCondition(this.listQuery).then(rep=>{
@@ -233,10 +241,10 @@
             }
             i++;
           })
-          console.log( this.primary_num)
+         /* console.log( this.primary_num)
           console.log( this.Three_num)
           console.log( this.second_num)
-          console.log( this.setdate)
+          console.log( this.setdate)*/
           this.option.series[0].data=this.primary_num
           this.option.series[1].data=this.second_num
           this.option.series[2].data=this.Three_num
@@ -253,7 +261,6 @@
         handler(newVal,oldVal){
           if (this.chart){
             if (newVal){
-              console.log(newVal)
               this.chart.setOption(newVal,true)
             }else{
               this.chart.setOption(oldVal,true)

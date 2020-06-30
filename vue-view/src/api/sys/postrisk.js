@@ -29,3 +29,10 @@ export function getsel() {
     method: 'get'
   })
 }
+
+export function listPostRisk() {
+  return request({
+    url: '/risk/listPostRisk',
+    method: 'get'
+  })
+}
