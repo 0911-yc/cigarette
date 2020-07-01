@@ -5,6 +5,7 @@ import com.xr.smoke.entity.WorkPlan;
 import com.xr.smoke.service.WorkPlanService;
 import com.xr.smoke.util.ResponseResult;
 import com.xr.smoke.util.StringSubstring;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,12 +16,13 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("role")
+@RequestMapping("workplan")
 public class WorkPlanController {
     @Autowired
     private WorkPlanService workPlanService;
 
     @RequestMapping("list")
+    @RequiresPermissions("workplan:list")
     public ResponseResult list(WorkPlan workPlan,Integer page,Integer limit){
         List<WorkPlan> list = workPlanService.list(workPlan);
         List<WorkPlan> list1 = workPlanService.list1(workPlan.getTitle(),(page-1)*limit,limit);
@@ -31,6 +33,7 @@ public class WorkPlanController {
     }
 
     @RequestMapping("add")
+    @RequiresPermissions("workplan:add")
     public ResponseResult add(WorkPlan workPlan){
         StringSubstring stringSubstring = new StringSubstring();
         workPlan.setContent(stringSubstring.substring(workPlan.getContent()));
@@ -50,6 +53,7 @@ public class WorkPlanController {
     }
 
     @RequestMapping("update")
+    @RequiresPermissions("workplan:update")
     public ResponseResult update(WorkPlan workPlan){
         StringSubstring stringSubstring = new StringSubstring();
         workPlan.setContent(stringSubstring.substring(workPlan.getContent()));
@@ -60,6 +64,7 @@ public class WorkPlanController {
     }
 
     @RequestMapping("delete")
+    @RequiresPermissions("workplan:delete")
     public ResponseResult delete(int id){
         workPlanService.delete(id);
         ResponseResult result = new ResponseResult();
@@ -68,6 +73,7 @@ public class WorkPlanController {
     }
 
     @RequestMapping("groupDept")
+    @RequiresPermissions("workplan:groupDept")
     public ResponseResult groupDept(StatusEntity statusEntity){
         List<StatusEntity> groupDept = workPlanService.groupDept(statusEntity);
         System.out.println(groupDept);

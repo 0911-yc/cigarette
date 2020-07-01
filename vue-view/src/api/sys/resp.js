@@ -16,6 +16,14 @@ export function deleteUser(id) {
   })
 }
 
+export function tz(id) {
+  return request({
+    url: '/resp/tz',
+    method: 'get',
+    params: { id }
+  })
+}
+
 export function update(data) {
   return request({
     url: '/resp/update',
