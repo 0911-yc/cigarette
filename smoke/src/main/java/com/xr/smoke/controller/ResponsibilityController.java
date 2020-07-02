@@ -125,4 +125,12 @@ public class ResponsibilityController {
         result.getData().put("message", "删除成功");
         return result;
     }
+
+    @RequestMapping("tz")
+    public ResponseResult tz(int id){
+        responsibilityService.tz(id);
+        ResponseResult result = new ResponseResult();
+        result.getData().put("message","发布成功");
+        return result;
+    }
 }

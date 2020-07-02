@@ -61,13 +61,12 @@
           <el-button size="mini" type="danger" @click="handleDelete(row)">
             删除
           </el-button>
-          <!--          <el-button size="mini" @click="tz">-->
-          <!--            发布通知-->
-          <!--          </el-button>-->
-          <!--          <el-button size="mini" @click="fk" v-if="noshow">-->
-          <!--&lt;!&ndash;          :style="{ display: visifk }" &ndash;&gt;-->
-          <!--            查看反馈-->
-          <!--          </el-button>-->
+          <el-button type="text" size="mini" @click="tz(row)">
+            发布通知
+          </el-button>
+          <el-button type="text" size="mini" @click="fk(row)" v-show="noshow">
+            查看反馈
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -170,7 +169,7 @@
   import 'quill/dist/quill.core.css'
   import 'quill/dist/quill.snow.css'
   import 'quill/dist/quill.bubble.css'
-  import {add, update, list, deleteUser, FileUpload} from '@/api/sys/resp'
+  import {add, update, list, deleteUser, FileUpload, tz} from '@/api/sys/resp'
   import waves from '@/directive/waves' // waves directive
   import {parseTime} from '@/utils'
   import Pagination from '@/components/Pagination' // 分页组件
@@ -187,6 +186,7 @@
         editorOption: {},
         readonly: true,
         show: false,
+        noshow: false,
         tableKey: 0,
         visifk: 'none',
         list: null, // 后台返回，给数据表格展示的数据
@@ -194,7 +194,7 @@
         listLoading: true, // 是否使用动画
         listQuery: {
           page: 1, // 分页需要的当前页
-          limit: 3, // 分页需要的每页显示多少条
+          limit: 5, // 分页需要的每页显示多少条
           // sex: 1,
           supervisiontitle: ''
         },
@@ -228,6 +228,32 @@
       this.getGroupDept()
     },
     methods: {
+      tz(index, row){
+      //   this.$confirm('确定发布通知?', '提示', {
+      //       confirmButtonText: '确定',
+      //       cancelButtonText: '取消',
+      //       type: 'warning'
+      //   }).then(() => {
+      //     // 调用ajax去后台删除
+      //       // 刷新数据表格
+      //      // this.getList()
+      //       // ajax去后台删除
+      //       this.noshow = !this.noshow
+      //       this.$notify({
+      //         title: '成功',
+      //         message: response.data.message,
+      //         type: 'success',
+      //         duration: 2000
+      //     })
+      //   }).catch(() => {
+      //     this.$message({
+      //       type: 'info',
+      //       message: '已取消通知'
+      //     })
+      //   })
+        console.log(index, row)
+        this.noshow = true
+       },
       handleDownload() {
         this.downloadLoading = true
         import('@/vendor/Export2Excel').then(excel => {

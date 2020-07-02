@@ -149,7 +149,7 @@
   import 'quill/dist/quill.core.css'
   import 'quill/dist/quill.snow.css'
   import 'quill/dist/quill.bubble.css'
-  import {add, update, list, deleteUser} from '@/api/sys/politicianTalk'
+  import {add, update, list, deleteUser} from '@/api/sys/talk'
   import waves from '@/directive/waves' // waves directive
   import {parseTime} from '@/utils'
   import Pagination from '@/components/Pagination' // 分页组件

@@ -33,4 +33,7 @@ public interface ResponsibilityMapper {
 
     @Select("select max(id) id from responsibility")
     public Responsibility max();
+
+    @Select("select * from responsibility where id=#{id}")
+    public Responsibility tz(int id);
 }

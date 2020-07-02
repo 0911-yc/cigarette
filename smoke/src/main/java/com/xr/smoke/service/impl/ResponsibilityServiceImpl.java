@@ -51,4 +51,8 @@ public class ResponsibilityServiceImpl implements ResponsibilityService {
     public Responsibility max() {
         return responsibilityMapper.max();
     }
+    @Override
+    public Responsibility tz(int id) {
+        return responsibilityMapper.tz(id);
+    }
 }
