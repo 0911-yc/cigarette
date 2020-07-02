@@ -21,7 +21,7 @@ public interface WorkPlanMapper {
     @Select("select w.id id,title,content,creationTime,creator,s.status statuse from workPlan w,status s where w.statuse=s.id")
     public List<WorkPlan> list(WorkPlan workPlan);
 
-    @Insert("insert into workPlan(title,content,creationTime,creator,statuse) values (#{title},#{content},NOW(),#{creator},#{statuse})")
+    @Insert("insert into workPlan(title,content,creationTime,creator,statuse) values (#{title},#{content},NOW(),#{creator},1)")
     public void add(WorkPlan workPlan);
 
     @Delete("delete from workPlan where id=#{id}")
