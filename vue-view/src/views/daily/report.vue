@@ -121,14 +121,6 @@
         <el-form-item label="信访内容摘要" prop="visitdigest">
           <el-input placeholder="....暂无内容" v-model="temp.visitdigest" />
         </el-form-item>
-        <!--<el-form-item label="自我简介">
-          <el-input
-            type="textarea"
-            :rows="4"
-            placeholder="请输入自我简介"
-            v-model="temp.introduction">
-          </el-input>
-        </el-form-item>-->
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">

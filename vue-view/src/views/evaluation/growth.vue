@@ -32,6 +32,7 @@
 </template>
 
 <script>
+  import waves from '@/directive/waves'
   import { deptOptions,postOptions,getsel,getselCondition} from '@/api/sys/postrisk'
   //let echarts = require('echarts/lib/echarts')
   // 引入柱状图组件

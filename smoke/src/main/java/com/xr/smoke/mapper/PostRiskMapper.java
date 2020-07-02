@@ -37,7 +37,7 @@ public interface PostRiskMapper {
      *
      * @return
      */
-    @Select("select date_format(creationTime,'%Y') creationTime,grade,count(grade) sum from postRisk group by grade,date_format(creationTime,'%Y')")
+    @Select("select date_format(creationTime,'%Y') creationTime,risk_value riskValue,grade,count(grade) sum from postRisk group by risk_value,grade,date_format(creationTime,'%Y')")
     List<Map<String, Object>> getsel();
 
     /**
@@ -57,18 +57,32 @@ public interface PostRiskMapper {
             "</script>"})
     List<Map<String, Object>> getselCondition(@Param("did") Integer did, @Param("pid") Integer pid);
 
+    /**
+     * 查询风险占比分析的数据
+     * @param postRisk
+     * @return
+     * <when test='postRisk.year!=null'>",
+     *             "and year regexp '${postRisk.year}'",
+     *             "</when>",
+     *             "<when test='postRisk.did!=null'>",
+     *             "and did = '${postRisk.did}'",
+     *             "</when>",
+     *             "<when test='postRisk.grade!=null'>",
+     *             "and grade = '${postRisk.grade}'",
+     *             "</when>
+     */
     @Select({"<script>",
-            "SELECT risk_value riskValue,grade FROM postRisk WHERE 1=1 ",
+            "SELECT risk_value riskValue,grade,count(grade) sum FROM postRisk WHERE 1=1 ",
             "<when test='postRisk.year!=null'>",
             "and year regexp '${postRisk.year}'",
             "</when>",
             "<when test='postRisk.did!=null'>",
-            "and did = '${postRisk.did}'",
+            "and did=#{did}'",
             "</when>",
             "<when test='postRisk.grade!=null'>",
-            "and grade = '${postRisk.grade}'",
+            "and grade=#{grade}'",
             "</when>",
-            "and status=1",
+            "group by grade,risk_value",
             "</script>"})
     List<PostRisk> Postselect(@Param("postRisk") PostRisk postRisk);
 }

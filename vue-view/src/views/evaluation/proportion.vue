@@ -24,10 +24,10 @@
       </el-option>
     </el-select>
 
-    <el-button style="float:right" @click="resetTemp" type="primary" icon="el-icon-refresh">
+    <el-button  @click="resetTemp" type="primary" icon="el-icon-refresh">
       重置
     </el-button>
-    <el-button style="float:right" type="primary" icon="el-icon-refresh" @click="getsel">
+    <el-button  type="primary" icon="el-icon-search" @click="getsel">
       查询
     </el-button>
 
@@ -53,15 +53,14 @@
     name: "risk",
     data() {
       return {
+        deptOptions: [],
+        dataValue: null,
         temp: {
           year: '',
           grade: '',
           did: ''
         },
-        deptOptions: [],
 
-
-        dataValue: null,
         data1: [
           /*{value:50, name:1,id:3},
           {value:50, name:2,id:3}*/
@@ -79,7 +78,7 @@
           legend: {
             orient: 'vertical',
             bottom: 'bottom',
-            data: ['张一', '张二', '张三']
+            //data: ['张一', '张二', '张三']
           },
           series: [
             {
@@ -109,7 +108,7 @@
       deptOptions().then(rep => {
         this.deptOptions = rep.data.items
       })
-      this.getsel()
+      this.getListCondition()
     },
 
     mounted() {
@@ -118,16 +117,14 @@
     },
 
     methods: {
-      // 去后台取数据的  当前的数据
-      getsel() {
+      getListCondition(){
         // 开始转圈圈
         this.$nextTick(function () {
           // debugger // 调试
           console.log(this.temp)
-          listPostRisk(this.temp).then(response => {
+          getsel(this.temp).then(response => {
             this.data1 = [],
               this.postarr = response.data.items
-            console.log(response.data.items)
             for (var i = 0; i < response.data.items.length; i++) {
               var obj = new Object();
               if (response.data.items[i].grade === 1) {
@@ -138,11 +135,37 @@
                 obj.name = '三级风险';
               }
               /* obj.name=response.data.items[i].riskLevel;*/
-              console.log(response.data.items[i])
+              console.log(response.data.items)
               obj.value = response.data.items[i].riskValue;
               this.data1[i] = obj;
             }
-            console.log(this.data1)
+            this.option.series[0].data = this.data1
+            // 转圈圈结束
+          })
+        })
+      },
+      // 去后台取数据的  当前的数据
+      getsel() {
+        // 开始转圈圈
+        this.$nextTick(function () {
+          // debugger // 调试
+          console.log(this.temp)
+          listPostRisk(this.temp).then(response => {
+            this.data1 = [],
+              this.postarr = response.data.items
+            for (var i = 0; i < response.data.items.length; i++) {
+              var obj = new Object();
+              if (response.data.items[i].grade === 1) {
+                obj.name = '一级风险';
+              } else if (response.data.items[i].grade === 2) {
+                obj.name = '二级风险';
+              } else if (response.data.items[i].grade === 3) {
+                obj.name = '三级风险';
+              }
+              /* obj.name=response.data.items[i].riskLevel;*/
+              obj.value = response.data.items[i].riskValue;
+              this.data1[i] = obj;
+            }
             this.option.series[0].data = this.data1
             // 转圈圈结束
           })
@@ -156,7 +179,6 @@
       },
       //初始化数据
       initData() {
-        console.log(this.data1)
         // 基于准备好的dom，初始化echarts实例
         this.chart = this.$echarts.init(document.getElementById('main1'));
         // 绘制图表
